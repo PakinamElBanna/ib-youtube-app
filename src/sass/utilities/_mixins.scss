@@ -1,0 +1,6 @@
+// buttons
+
+@mixin btn-generator($btn-color, $btn-background) {
+  background-color: $btn-background;
+  color: $btn-color;
+}

@@ -1,0 +1,35 @@
+  @import '../utilities/variables';
+
+  *,
+  *:after,
+  *:before {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-family: inherit;
+      font-size: inherit;
+      vertical-align: baseline;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      }
+
+  html {
+      font: 10px $font-stack;
+  }
+
+  img {
+    width: auto;
+    max-width: 100%;
+    height: auto !important;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  table {
+     border-collapse: collapse;
+     border-spacing: 0;
+  }

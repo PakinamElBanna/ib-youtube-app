@@ -1,0 +1,31 @@
+// External imports
+@import "node_modules/rfs/scss/rfs";
+
+// Base imports
+
+@import './base/_reset';
+@import './base/_typography';
+
+
+// Components imports
+
+@import './components/_buttons';
+
+// Layout imports
+
+@import './layout/grid';
+@import './layout/header';
+
+//Utilities imports
+
+@import './utilities/functions';
+@import './utilities/mixins';
+@import './utilities/variables';
+
+
+
+// Basic styling
+
+.title {
+  @include responsive-font-size(4rem);
+}
