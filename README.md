@@ -1,5 +1,10 @@
 # YoutubeApp
 
+Assumptions:
+
+ - Assuming a big, scalable app, each significant router location is treated as a potential big feature, hence the lazy loaded features that might look extra for now
+ - Although the search page is the current initial route, it's also lazy loaded in case a landing page is introduced later
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
 
 ## Development server
