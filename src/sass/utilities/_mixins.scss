@@ -77,7 +77,7 @@
 
 @mixin create-grid-columns($_class) {
     @include loop-grid-columns($grid__columns, $_class, width);
-    @include row-justify-generator($_class);
+    @include row-justify-generator('row');
 }
 
 // Buttons generator

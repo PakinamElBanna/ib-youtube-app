@@ -1,0 +1,17 @@
+@import 'utilities/variables';
+@import 'base/typography';
+
+.card {
+  &__title {
+    color: $black;
+    font-weight: $font-weight-regular;
+    font-size: 1em;
+  }
+  &__subtitle {
+    color: $subtitle;
+    font-size: 0.9em;
+    p {
+      line-height: 1.2em;
+    }
+  }
+}
