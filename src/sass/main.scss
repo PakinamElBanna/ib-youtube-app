@@ -1,26 +1,26 @@
 // External imports
-@import "node_modules/rfs/scss/rfs";
+@import 'node_modules/rfs/scss/rfs';
 
 // Base imports
 
-@import './base/_reset';
-@import './base/_typography';
+@import 'base/_reset';
+@import 'base/_typography';
 
 
 // Components imports
 
-@import './components/_buttons';
+@import 'components/_buttons';
 
 // Layout imports
 
-@import './layout/grid';
-@import './layout/header';
+@import 'layout/grid';
+@import 'layout/header';
 
 //Utilities imports
 
-@import './utilities/functions';
-@import './utilities/mixins';
-@import './utilities/variables';
+@import 'utilities/functions';
+@import 'utilities/mixins';
+@import 'utilities/variables';
 
 
 
@@ -28,4 +28,21 @@
 
 .title {
   @include responsive-font-size(4rem);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $red;
+  height: 48px;
+  padding: 0 1em;
+  @include forLargeScreens('700px') {
+    box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, .06);
+    height: 60px;
+    background: $white;
+    position: fixed;
+    top: 0;
+    width: 100%
+  }
 }

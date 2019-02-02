@@ -9,6 +9,8 @@ import { LoaderComponent } from './loader/loader.component';
   declarations: [ChannelCardComponent, VideoCardComponent, PlaylistCardComponent, LoaderComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
   ]
 })
 export class SharedModule { }

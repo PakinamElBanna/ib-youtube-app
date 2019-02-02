@@ -2,8 +2,14 @@
 
 Assumptions:
 
- - Assuming a big, scalable app, each significant router location is treated as a potential big feature, hence the lazy loaded features that might look extra for now
+ - Assuming a big, scalable app, each significant router location is treated as a potential big feature, Hence:
+ 
+  - the lazy loaded features that might    look extra for now
+  - Material design icons has been installed entirely, assuming that a wide range of icons will be used accross the app 
+  
  - Although the search page is the current initial route, it's also lazy loaded in case a landing page is introduced later
+
+ - Just to satisfy the provided requirements, the user is immediately redirected to the search page, which fires a search function on init and populates the videos list
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
 

@@ -1,4 +1,4 @@
-  @import '../utilities/variables';
+  @import 'utilities/variables';
 
   *,
   *:after,
@@ -14,14 +14,15 @@
       box-sizing: border-box;
       }
 
-  html {
-      font: 10px $font-stack;
+  html, body {
+      font: 14px $font-stack;
+      height: 100%;
   }
 
   img {
     width: auto;
     max-width: 100%;
-    height: auto !important;
+    max-height: 100%;
   }
 
   ul {

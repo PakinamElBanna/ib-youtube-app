@@ -1,6 +1,25 @@
 // buttons
 
 @mixin btn-generator($btn-color, $btn-background) {
-  background-color: $btn-background;
+  @include forLargeScreens('700px'){
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  background: $btn-background;
   color: $btn-color;
+  outline: none; // for cosmetic reason, although not very semantically correct.
+}
+
+@mixin input-generator($input-background) {
+  @include forLargeScreens('700px'){
+    border: 1px solid $border-grey;
+  }
+  background: $input-background;
+  padding: 0 1em;
+  outline: none; // for cosmetic reason, although not very semantically correct.
+}
+
+@mixin forLargeScreens($media) {
+    @media (min-width: $media) { @content; }
 }
