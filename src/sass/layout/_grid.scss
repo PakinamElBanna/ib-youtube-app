@@ -1,15 +1,13 @@
 @import 'utilities/mixins';
 @import 'utilities/variables';
 
-.container {
-    // @include clearfix();
+.wrapper {
+    @include clearfix();
     max-width: 70em;
     margin: 0 auto;
-    // flex-direction: column;
-    // @include forLargeScreens('700px') {
-    //   flex-direction: row;
-    //   flex: 1;
-    // }
+    @include forLargeScreens('700px') {
+      margin-top: $header__height--desktop;
+    }
 }
 
 .row {
@@ -18,12 +16,11 @@
     flex: 0 1 auto;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-left: ($grid__gutter / -2);
-    margin-right: ($grid__gutter / -2);
+    padding: 1em;
 }
 
 @include all-grid-columns-generator();
-
+@include create-grid-columns('col');
 // [class*='column-'] {
 //     float: left;
 //     padding: 1em;

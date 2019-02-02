@@ -35,12 +35,12 @@
   align-items: center;
   justify-content: space-between;
   background: $red;
-  height: 48px;
+  height: $header__height--mobile;
   padding: 0 1em;
   margin: 0 auto;
   @include forLargeScreens('700px') {
     box-shadow: 0px 4px 8px -3px rgba(17, 17, 17, .06);
-    height: 60px;
+    height: $header__height--desktop;
     background: $white;
     position: fixed;
     top: 0;

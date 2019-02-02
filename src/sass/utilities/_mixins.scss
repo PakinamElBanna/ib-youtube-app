@@ -12,10 +12,10 @@
 
 @mixin all-grid-columns-generator(
     $i: 1,
-    $list: '.#{col}#{$i}'
+    $list: '.#{col}-#{$i}'
 ) {
     @for $i from (1 + 1) through $grid__columns {
-        $list: '#{$list}, .#{col}#{$i}';
+        $list: '#{$list}, .#{col}-#{$i}';
     }
     #{$list} {
         @include column-generator();
@@ -65,7 +65,8 @@
 
 @mixin loop-grid-columns($columns, $class, $width) {
     @for $i from 0 through $columns {
-            .#{$class}#{$i} {
+            .#{$class}-#{$i} {
+            // background: red;
             flex-basis: percentage(($i / $grid__columns));
             max-width: percentage(($i / $grid__columns));
         }
@@ -75,12 +76,9 @@
 // Column class generator
 
 @mixin create-grid-columns($_class) {
-    @include grid-columns-generator($grid__columns, $_class, width);
+    @include loop-grid-columns($grid__columns, $_class, width);
     @include row-justify-generator($_class);
 }
-
-
-
 
 // Buttons generator
 
