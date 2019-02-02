@@ -1,15 +1,102 @@
-// buttons
+// Grid generator
+
+@mixin grid-generator($columns) {
+  float: left;
+  margin-right: $grid__gutter;
+  margin-bottom: $grid__gutter;
+  width: ((100% - (($cols - 1) * $grid__gutter)) / $cols );
+  &:nth-child(#{$cols}n) {
+    margin-right: 0;
+  }
+}
+
+@mixin all-grid-columns-generator(
+    $i: 1,
+    $list: '.#{col}#{$i}'
+) {
+    @for $i from (1 + 1) through $grid__columns {
+        $list: '#{$list}, .#{col}#{$i}';
+    }
+    #{$list} {
+        @include column-generator();
+    }
+}
+
+// generate justify content classes
+
+@mixin row-justify-generator($_class) {
+    .#{$_class}--start {
+        justify-content: flex-start;
+    }
+    .#{$_class}--center {
+        justify-content: center;
+    }
+    .#{$_class}--end {
+        justify-content: flex-end;
+    }
+    .#{$_class}--top {
+        align-items: flex-start;
+    }
+    .#{$_class}--middle {
+        align-items: center;
+    }
+    .#{$_class}--end {
+        align-items: flex-end;
+    }
+    .#{$_class}--stretch {
+        align-items: stretch;
+    }
+    .#{$_class}--reverse {
+        flex-direction: row-reverse;
+    }
+    .#{$_class}--around {
+        justify-content: space-around;
+    }
+    .#{$_class}--between {
+        justify-content: space-between;
+    }
+}
+
+
+@mixin column-generator() {
+  padding: 0 ($grid__gutter / 2); // inner padding of each column
+  min-height: 1px; // prevents collapsing when column is empty
+}
+
+@mixin loop-grid-columns($columns, $class, $width) {
+    @for $i from 0 through $columns {
+            .#{$class}#{$i} {
+            flex-basis: percentage(($i / $grid__columns));
+            max-width: percentage(($i / $grid__columns));
+        }
+    }
+}
+
+// Column class generator
+
+@mixin create-grid-columns($_class) {
+    @include grid-columns-generator($grid__columns, $_class, width);
+    @include row-justify-generator($_class);
+}
+
+
+
+
+// Buttons generator
 
 @mixin btn-generator($btn-color, $btn-background) {
   @include forLargeScreens('700px'){
     &:hover {
       cursor: pointer;
+      transition: all .3s ease-in-out;
     }
   }
   background: $btn-background;
   color: $btn-color;
   outline: none; // for cosmetic reason, although not very semantically correct.
 }
+
+// Input fields generator
 
 @mixin input-generator($input-background) {
   @include forLargeScreens('700px'){
@@ -20,6 +107,18 @@
   outline: none; // for cosmetic reason, although not very semantically correct.
 }
 
+// Media queries generator
+
 @mixin forLargeScreens($media) {
     @media (min-width: $media) { @content; }
+}
+
+// Clearfix
+
+@mixin clearfix() {
+  &:after {
+    display: table;
+    clear: both;
+    content: '';
+  }
 }

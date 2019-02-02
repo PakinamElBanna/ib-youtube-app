@@ -1,18 +1,32 @@
-.wrapper {
-    width: 100%;
+@import 'utilities/mixins';
+@import 'utilities/variables';
+
+.container {
+    // @include clearfix();
+    max-width: 70em;
     margin: 0 auto;
+    // flex-direction: column;
+    // @include forLargeScreens('700px') {
+    //   flex-direction: row;
+    //   flex: 1;
+    // }
 }
 
-.wrapper:after,
-.row:after {
-      content: "";
-      display: table;
-      clear: both;
-      }
-
-[class*='column-'] {
-    float: left;
-    padding: 1em;
-    width: 100%;
-    min-height: 1px;
+.row {
+    @include clearfix();
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: ($grid__gutter / -2);
+    margin-right: ($grid__gutter / -2);
 }
+
+@include all-grid-columns-generator();
+
+// [class*='column-'] {
+//     float: left;
+//     padding: 1em;
+//     width: 100%;
+//     min-height: 1px;
+// }

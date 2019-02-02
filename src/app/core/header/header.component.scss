@@ -45,10 +45,14 @@
     height: 40px;
     align-self: center;
     @include forLargeScreens('700px') {
-      @include btn-generator($button-color, $button-background);
+      @include btn-generator($button__color, $button__background);
       border: 1px solid $border-grey;
       border-left: none;
       flex-basis: 10%;
+      &:hover {
+        background: $button__background--hover;
+        color: $button__color--hover;
+      }
     }
   }
 }
