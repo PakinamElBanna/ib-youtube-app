@@ -85,7 +85,7 @@
 @mixin btn-generator($btn-color, $btn-background) {
   background: $btn-background;
   color: $btn-color;
-  outline: none; // for cosmetic reason, although not very semantically correct.
+  outline-width: 0;
   &:hover {
     cursor: pointer;
     transition: all .3s ease-in-out;
@@ -100,7 +100,7 @@
   }
   background: $input-background;
   padding: 0 1em;
-  outline: none; // for cosmetic reason, although not very semantically correct.
+  outline-width: 0;
 }
 
 // Media queries generator

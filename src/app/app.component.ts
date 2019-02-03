@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'youtube-app';
+
+  onSearchStarted(searchTerm) {
+    debugger
+    console.log(searchTerm);
+  }
 }
