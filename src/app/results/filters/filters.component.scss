@@ -1,0 +1,14 @@
+@import 'utilities/variables';
+
+.filters {
+  border-bottom: 1px solid $border-grey;
+  &__picker {
+    margin-right: 0.8em;
+    border: 1px solid #cccccc;
+    height: 3em;
+    padding: 0 1em;
+    max-width: 9em;
+  }
+}
+
+// border: 1px solid $border-grey;
