@@ -1,4 +1,11 @@
-import { Component, OnInit, HostListener, SimpleChange } from '@angular/core';
+import { Component,
+        OnInit,
+        HostListener,
+        Output,
+        SimpleChange,
+        EventEmitter,
+        ViewChild,
+        ElementRef } from '@angular/core';
 // import { WindowRefService } from '../../services/window-ref.service';
 
 @Component({
@@ -6,12 +13,12 @@ import { Component, OnInit, HostListener, SimpleChange } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
+  @ViewChild('searchInputValue') searchInputValueRef: ElementRef;
+  @Output() searchStarted = new EventEmitter<string>();
   device = 'mobile';
   viewWidth: number;
   searching = false;
-  // should be an empty string, but it's initialized with a default value here just to satisfy the task requirement.
-  searchTerm = 'spongebob';
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
@@ -25,29 +32,20 @@ export class HeaderComponent implements OnInit {
   }
 
     constructor() {
+      // TODO: SET TITLE TO ROUTE QUERY ELEMENT LATER
       // returns the native window obj to be later used in tests
       this.getScreenSize();
   }
 
-  ngOnInit() {
-  }
-
-  onUpdateSearchTerm(event: Event) {
-    this.searchTerm = (event.target as HTMLInputElement).value;
-  }
-
   onSearchClick() {
-    if (this.device === 'mobile') {
-      this.searching ? this.performSearch() : this.searching = true;
-    } else {
-      this.performSearch();
-    }
+    this.searchInputValueRef
+      ? this.performSearch(this.searchInputValueRef.nativeElement.value)
+      : (this.searching = true);
   }
 
-  performSearch() {
-    this.searching = true;
-    // perform search using service
-    // reset searching to false;
+  performSearch(searchTerm: string) {
+    this.searchStarted.emit(searchTerm);
+    // TODO: REFACTOR
     if (this.device === 'mobile') {
       this.searching = false;
     }

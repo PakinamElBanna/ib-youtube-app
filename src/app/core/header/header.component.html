@@ -4,8 +4,8 @@
     <img src="assets/images/mobile-logo.svg" />
   </picture>
   <div class="header__search">
-    <input *ngIf="searching; else title" class="search__input" (input)="onUpdateSearchTerm($event)" />
-    <button class="button search__button" (click)="onSearchClick()">
+    <input *ngIf="searching; else title" class="search__input" #searchInputValue />
+    <button class="button search__button" (click)="onSearchClick(searchInputValue)">
       <i class="material-icons">search</i>
     </button>
   </div>

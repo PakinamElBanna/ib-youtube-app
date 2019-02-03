@@ -36,10 +36,6 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should have as default searchTerm 'spongebob`, () => {
-    expect(component.searchTerm).toEqual('spongebob');
-  });
-
   it(`should always display the search input field if the app is running on desktop`, () => {
     component.device = 'desktop';
     fixture.detectChanges();
@@ -66,7 +62,7 @@ describe('HeaderComponent', () => {
     const button = fixture.debugElement.query(By.css('.search__button'));
     component.searching = false;
     component.device = 'mobile';
-
+    fixture.detectChanges();
     button.triggerEventHandler('click', {} as Event);
     fixture.detectChanges();
     expect(component.searching).toBeTruthy();
@@ -84,17 +80,6 @@ describe('HeaderComponent', () => {
     expect(component.performSearch).toHaveBeenCalled();
     expect(component.searching).toBeFalsy();
     expect(fixture.debugElement.query(By.css('.search__input'))).toBeNull();
-  });
-
-  it('should set searchTerm when onUpdateSearchTerm is called', () => {
-    component.searching = true;
-    fixture.detectChanges();
-    spyOn(component, 'onUpdateSearchTerm').and.callThrough();
-    const input = fixture.debugElement.query(By.css('.search__input'));
-    const el = input.nativeElement;
-    el.value = 'newTerm';
-    el.dispatchEvent(new Event('input'));
-    expect(component.searchTerm).toBe('newTerm');
   });
 
   it('should trigger onResize method when window is resized', () => {
