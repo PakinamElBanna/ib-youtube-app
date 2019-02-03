@@ -3,12 +3,12 @@
     <source media="(min-width: 700px)" srcset="assets/images/logo.svg">
     <img src="assets/images/mobile-logo.svg" />
   </picture>
-  <div class="header__search">
+  <form class="header__search">
     <input *ngIf="searching; else title" class="search__input" #searchInputValue />
-    <button class="button search__button" (click)="onSearchClick(searchInputValue)">
+    <button class="button search__button" (click)="onSearchClick($event)">
       <i class="material-icons">search</i>
     </button>
-  </div>
+  </form>
 </div>
 
 <ng-template #title>

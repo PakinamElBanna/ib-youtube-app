@@ -4,8 +4,8 @@ import { Component,
         Output,
         SimpleChange,
         EventEmitter,
-        ViewChild,
-        ElementRef } from '@angular/core';
+        ElementRef,
+        ViewChild } from '@angular/core';
 // import { WindowRefService } from '../../services/window-ref.service';
 
 @Component({
@@ -38,6 +38,7 @@ export class HeaderComponent {
   }
 
   onSearchClick() {
+    event.preventDefault();
     this.searchInputValueRef
       ? this.performSearch(this.searchInputValueRef.nativeElement.value)
       : (this.searching = true);
