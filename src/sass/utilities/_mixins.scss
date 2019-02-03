@@ -83,15 +83,13 @@
 // Buttons generator
 
 @mixin btn-generator($btn-color, $btn-background) {
-  @include forLargeScreens('700px'){
-    &:hover {
-      cursor: pointer;
-      transition: all .3s ease-in-out;
-    }
-  }
   background: $btn-background;
   color: $btn-color;
   outline: none; // for cosmetic reason, although not very semantically correct.
+  &:hover {
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+  }
 }
 
 // Input fields generator

@@ -40,14 +40,7 @@ describe('HeaderComponent', () => {
     expect(component.searchTerm).toEqual('spongebob');
   });
 
-  it(`should have searching property set to false by default`, () => {
-    expect(component.searching).toBeFalsy();
-  });
-
   it(`should always display the search input field if the app is running on desktop`, () => {
-    component.device = 'mobile';
-    fixture.detectChanges();
-    expect(fixture.debugElement.query(By.css('.search__input'))).toBeNull();
     component.device = 'desktop';
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('.search__input'))).toBeTruthy();
@@ -55,8 +48,8 @@ describe('HeaderComponent', () => {
 
   it('should set searching to true if searching is false on search button click', () => {
     const button = fixture.debugElement.query(By.css('.search__button'));
+    component.searching = false;
     fixture.detectChanges();
-    expect(component.searching).toBeFalsy();
 
     button.triggerEventHandler('click', {} as Event);
     fixture.detectChanges();

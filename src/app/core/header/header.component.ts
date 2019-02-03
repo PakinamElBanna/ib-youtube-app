@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
     this.viewWidth = window.innerWidth;
     if (this.viewWidth >= 700 ) {
       this.device = 'desktop';
+      this.searching = true;
     } else {
       this.device = 'mobile';
     }
@@ -31,8 +32,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  onUpdateSearchTerm(event) {
-    this.searchTerm = event.target.value;
+  onUpdateSearchTerm(event: Event) {
+    this.searchTerm = (event.target as HTMLInputElement).value;
   }
 
   onSearchClick() {

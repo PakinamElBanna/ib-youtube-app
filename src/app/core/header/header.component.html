@@ -4,7 +4,7 @@
     <img src="assets/images/mobile-logo.svg" />
   </picture>
   <div class="header__search">
-    <input *ngIf="((searching && device == 'mobile') || device == 'desktop') ; else title" class="search__input" (input)="onUpdateSearchTerm($event)" />
+    <input *ngIf="searching; else title" class="search__input" (input)="onUpdateSearchTerm($event)" />
     <button class="button search__button" (click)="onSearchClick()">
       <i class="material-icons">search</i>
     </button>

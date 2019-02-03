@@ -6,12 +6,20 @@
     color: $black;
     font-weight: $font-weight-regular;
     font-size: 1em;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__subtitle {
     color: $subtitle;
     font-size: 0.9em;
-    p {
+    display: flex;
+    flex-direction: column;
+    a {
       line-height: 1.2em;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
