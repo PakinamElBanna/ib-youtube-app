@@ -14,6 +14,13 @@
     display: flex;
     justify-content: space-between;
   }
+  &__picker {
+  margin-right: 0.8em;
+  border: 1px solid #cccccc;
+  height: 3em;
+  width: 100%;
+  padding: 0 1em;
+  }
 }
 
 .radio {

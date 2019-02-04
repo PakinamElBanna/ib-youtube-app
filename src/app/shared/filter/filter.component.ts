@@ -9,6 +9,7 @@ import { Filter } from './filter.model';
 export class FilterComponent {
 
 @Input() filter: Filter;
+@Input() device: string;
 
   @ViewChild('filterInputValue') filterInputValueRef: ElementRef;
 
@@ -19,6 +20,7 @@ export class FilterComponent {
   }
 
   onFilterRemove(event) {
+    console.log(this.filterInputValueRef.nativeElement.value);
     this.filterInputValueRef.nativeElement.checked = false;
     // remove filter from service
   }

@@ -1,15 +1,8 @@
-<form class="filters">
+<div class="filters">
   <div class="row--start row" *ngIf="device === 'mobile'; else desktop">
-    <div class="col-12">
-      <select id="type" class="filters__picker col-4">
-        <option *ngFor="let filter of mobileFilters.type" value="filter">{{filter}}</option>
-      </select>
-      <select id="upload-time" class="filters__picker col-4">
-        <option *ngFor="let filter of mobileFilters.uploadTime" value="filter">{{filter}}</option>
-      </select>
-    </div>
+      <app-filter [device] = "device" class="filters__item col-4" *ngFor="let filter of mobileFilters" [filter]="filter"></app-filter>
   </div>
-</form>
+</div>
 
 <ng-template #desktop>
   <div class="filters__summary">
@@ -17,12 +10,7 @@
     <span>About (HARDCODED) results</span>
     <button type="button" (click)="onFiltersClick($event)"><i class="material-icons">filter_list</i>filter</button>
   </div>
-  <!-- <div *ngIf="showFilters" class="filters__controls row">
-    <ng-template ngFor let-filter [ngForOf]="desktopFilters" [ngForTemplate]="filterTemplate">
-      <app-filter class="filters__item col-4" [filter]="filter"></app-filter>
-    </ng-template>
-  </div> -->
-    <div *ngIf="showFilters" class="filters__controls row">
-      <app-filter class="filters__item col-4" *ngFor="let filter of desktopFilters" [filter] = "filter"></app-filter>
-    </div>
+  <div *ngIf="showFilters" class="filters__controls row">
+    <app-filter class="filters__item col-4" *ngFor="let filter of desktopFilters" [filter] = "filter"></app-filter>
+  </div>
 </ng-template>

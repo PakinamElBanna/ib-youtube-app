@@ -11,14 +11,14 @@ import { FilterComponent } from '../../shared/filter/filter.component';
 export class FiltersComponent {
   device = 'mobile';
   showFilters = false;
-  mobileFilters = {
-    type: ['All', 'Channel', 'Playlist'],
-    uploadTime: ['Anytime', 'Today', 'This Week', 'This Month']
-  };
+  mobileFilters = [
+    new Filter('type', ['All', 'Channel', 'Playlist']),
+    new Filter('upload time', ['Anytime', 'Today', 'This Week', 'This Month'])
+  ];
   desktopFilters = [
     new Filter('type', ['All', 'Channel', 'Playlist']),
     new Filter('upload time', ['Anytime', 'Today', 'This Week', 'This Month']),
-    new Filter('sort by', ['Relevance', 'Upload date', 'View count'])
+    new Filter('sort by', ['relevance', 'Upload date', 'View count'])
   ];
 
   @HostListener('window:resize', ['$event'])

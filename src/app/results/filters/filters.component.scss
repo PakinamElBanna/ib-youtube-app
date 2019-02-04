@@ -6,13 +6,6 @@
   @include forLargeScreens('700px') {
     margin: 0 1em;
   }
-  &__picker {
-    margin-right: 0.8em;
-    border: 1px solid #cccccc;
-    height: 3em;
-    padding: 0 1em;
-    max-width: 9em;
-  }
   &__summary {
     display: flex;
     justify-content: space-between;
