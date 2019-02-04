@@ -6,7 +6,6 @@ import { Component,
         EventEmitter,
         ElementRef,
         ViewChild } from '@angular/core';
-// import { WindowRefService } from '../../services/window-ref.service';
 
 @Component({
   selector: 'app-header',
@@ -14,13 +13,17 @@ import { Component,
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+
   @ViewChild('searchInputValue') searchInputValueRef: ElementRef;
+
   @Output() searchStarted = new EventEmitter<string>();
+
   device = 'mobile';
   viewWidth: number;
   searching = false;
 
   @HostListener('window:resize', ['$event'])
+  
   getScreenSize(event?) {
     this.viewWidth = window.innerWidth;
     if (this.viewWidth >= 700 ) {
@@ -38,7 +41,6 @@ export class HeaderComponent {
   }
 
   onSearchClick() {
-    event.preventDefault();
     this.searchInputValueRef
       ? this.performSearch(this.searchInputValueRef.nativeElement.value)
       : (this.searching = true);
