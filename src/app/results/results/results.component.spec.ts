@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResultsComponent } from './results.component';
 import { LoadingComponent } from '../../shared/loading/loading.component';
 import { ItemCardComponent } from '../../shared/item-card/item-card.component';
+import { FiltersComponent } from '../filters/filters.component';
 
 
 describe('ResultsComponent', () => {
@@ -11,7 +12,10 @@ describe('ResultsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultsComponent, LoadingComponent, ItemCardComponent ]
+      declarations: [ ResultsComponent,
+                      LoadingComponent,
+                      ItemCardComponent,
+                      FiltersComponent ]
     })
     .compileComponents();
   }));
