@@ -1,7 +1,11 @@
 @import 'utilities/variables';
+@import 'utilities/mixins';
 
 .filters {
-  border-bottom: 1px solid $border-grey;
+  border-bottom: 1px solid $border-light-grey;
+  @include forLargeScreens('700px') {
+    margin: 0 1em;
+  }
   &__picker {
     margin-right: 0.8em;
     border: 1px solid #cccccc;
@@ -9,6 +13,18 @@
     padding: 0 1em;
     max-width: 9em;
   }
+  &__summary {
+    display: flex;
+    justify-content: space-between;
+    min-height: 4em;
+    align-items: center;
+    button {
+      @include btn-generator($dark_grey, none);
+      text-transform: uppercase;
+      i {
+      vertical-align: middle;
+      margin-right: 0.5em;
+      }
+    }
+  }
 }
-
-// border: 1px solid $border-grey;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Result } from './result.model';
 
 @Component({
@@ -6,12 +6,9 @@ import { Result } from './result.model';
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss']
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent {
+
   results: Result[] = [];
 
   constructor() { }
-
-  ngOnInit() {
-  }
-
 }

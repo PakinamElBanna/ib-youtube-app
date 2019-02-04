@@ -1,0 +1,10 @@
+<div class="filter">
+  <h3 class="filter__title">{{filter.name}}</h3>
+  <div *ngFor="let option of filter.options; let i = index" class="filter__body radio row">
+    <input type="radio" name={{filter.name}} value={{option}} id={{option}} #filterInputValue (input)="onFilterChange($event)" />
+    <label for={{option}} class="radio-label col-6">
+      {{option}}
+      <button type="button" *ngIf="filter.name !== 'sort by'" class="radio-button" (click)="onFilterRemove($event)"><i class="material-icons">close</i></button>
+    </label>
+  </div>
+</div>

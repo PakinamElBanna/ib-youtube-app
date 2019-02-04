@@ -4,13 +4,15 @@ import { LoadingComponent } from './loading/loading.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { InfoCardComponent } from './info-card/info-card.component';
 import { ItemCardComponent } from './item-card/item-card.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
     LoadingComponent,
     AvatarComponent,
     InfoCardComponent,
-    ItemCardComponent],
+    ItemCardComponent,
+    FilterComponent],
   imports: [
     CommonModule
   ],
@@ -18,7 +20,8 @@ import { ItemCardComponent } from './item-card/item-card.component';
     LoadingComponent,
     AvatarComponent,
     InfoCardComponent,
-    ItemCardComponent
+    ItemCardComponent,
+    FilterComponent
   ]
 })
 export class SharedModule { }

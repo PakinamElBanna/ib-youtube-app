@@ -1,0 +1,54 @@
+@import 'utilities/variables';
+@import 'base/typography';
+@import 'utilities/mixins';
+
+.filter {
+  &__title {
+    color: $black;
+    text-transform: uppercase;
+    padding: 1em 0;
+    border-bottom: 1px solid $border-light-grey;
+  }
+  &__body {
+    padding: 1em 0;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.radio {
+    input {
+    position: absolute;
+    opacity: 0;
+    button {
+      display: none;
+    }
+    + .radio-label {
+      display: flex;
+      color: $subtitle;
+      font-weight: $font-weight-regular;
+      justify-content: space-between;
+      justify-items: center;
+      flex: 1;
+      &:hover {
+        cursor: pointer;
+      }
+      button {
+        @include btn-generator($black, none);
+        display: none;
+        i {
+          font-size: 1em;
+        }
+      }
+    }
+    &:checked {
+      + .radio-label {
+        color: $black;
+        font-weight: $font-weight-bold;
+        button {
+          display: block;
+        }
+      }
+    }
+  }
+}

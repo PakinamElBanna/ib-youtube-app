@@ -1,16 +1,28 @@
-<form class="filters container">
-  <div class="row--start row">
-    <label for="type" class="select-label"></label>
-    <select id="type" class="filters__picker col-4">
-      <option value="all">All</option>
-      <option value="channel">Channel</option>
-      <option value="playlist">Playlist</option>
-    </select>
-    <select id="upload-time" class="filters__picker col-4">
-      <option value="any">Anytime</option>
-      <option value="today">Today</option>
-      <option value="week">This Week</option>
-      <option value="month">This Month</option>
-    </select>
+<form class="filters">
+  <div class="row--start row" *ngIf="device === 'mobile'; else desktop">
+    <div class="col-12">
+      <select id="type" class="filters__picker col-4">
+        <option *ngFor="let filter of mobileFilters.type" value="filter">{{filter}}</option>
+      </select>
+      <select id="upload-time" class="filters__picker col-4">
+        <option *ngFor="let filter of mobileFilters.uploadTime" value="filter">{{filter}}</option>
+      </select>
+    </div>
   </div>
 </form>
+
+<ng-template #desktop>
+  <div class="filters__summary">
+    <!-- TODO: Fix hardcoded value -->
+    <span>About (HARDCODED) results</span>
+    <button type="button" (click)="onFiltersClick($event)"><i class="material-icons">filter_list</i>filter</button>
+  </div>
+  <!-- <div *ngIf="showFilters" class="filters__controls row">
+    <ng-template ngFor let-filter [ngForOf]="desktopFilters" [ngForTemplate]="filterTemplate">
+      <app-filter class="filters__item col-4" [filter]="filter"></app-filter>
+    </ng-template>
+  </div> -->
+    <div *ngIf="showFilters" class="filters__controls row">
+      <app-filter class="filters__item col-4" *ngFor="let filter of desktopFilters" [filter] = "filter"></app-filter>
+    </div>
+</ng-template>
