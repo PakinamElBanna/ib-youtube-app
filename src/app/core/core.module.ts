@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ResultsService } from '../results/results.service';
 
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HeaderComponent],
@@ -14,7 +15,8 @@ import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
     CommonModule,
     SharedModule,
     RouterModule,
-    CoreRoutingModule
+    CoreRoutingModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent

@@ -18,7 +18,6 @@ export class DataService {
     return this.http.get(`${apiBaseUrl}search`, {
       params: this.params
     }).pipe(
-        retry(3),
         map(
           (response) => {
             const data = response;
