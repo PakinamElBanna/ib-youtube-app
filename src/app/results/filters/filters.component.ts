@@ -1,7 +1,8 @@
-import { Component, HostListener } from '@angular/core';
-import { Filter } from '../../shared/filter/filter.model';
+import { Component, Input } from '@angular/core';
+import { Filter, FilterBluePrint } from '../../shared/filter/filter.model';
 import { NgForOfContext } from '@angular/common';
 import { FilterComponent } from '../../shared/filter/filter.component';
+import { ResultsService } from '../results.service';
 
 @Component({
   selector: 'app-filters',
@@ -9,32 +10,55 @@ import { FilterComponent } from '../../shared/filter/filter.component';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent {
-  device = 'mobile';
+  @Input() resultsCount: number;
+  @Input() resetFilters: boolean;
+
   showFilters = false;
+  filter = {order: 'relevance'};
+  reset = false;
+
   mobileFilters = [
-    new Filter('type', ['All', 'Channel', 'Playlist']),
-    new Filter('upload time', ['Anytime', 'Today', 'This Week', 'This Month'])
+    new Filter('type', ['all', 'channel', 'playlist']),
+    new Filter('upload date', ['anytime', 'today', 'this week', 'this month'])
   ];
   desktopFilters = [
-    new Filter('type', ['All', 'Channel', 'Playlist']),
-    new Filter('upload time', ['Anytime', 'Today', 'This Week', 'This Month']),
-    new Filter('sort by', ['relevance', 'Upload date', 'View count'])
+    new Filter('upload date', ['anytime', 'today', 'this week', 'this month']),
+    new Filter('type', ['all', 'channel', 'playlist']),
+    new Filter('sort by', ['relevance', 'date', 'view count'])
   ];
 
-  @HostListener('window:resize', ['$event'])
-  getScreenSize(event?) {
-    if (window.innerWidth >= 700) {
-      this.device = 'desktop';
-    } else {
-      this.device = 'mobile';
-    }
-  }
-
-  constructor() {
-    this.getScreenSize();
+  constructor(private resultsService: ResultsService) {
+    this.resultsService.resetFilters.subscribe(reset => this.reset = reset);
   }
 
   onFiltersClick(event) {
     this.showFilters = !this.showFilters;
+  }
+
+
+  onFilterSelected(filterCreator: FilterBluePrint) {
+    const filter = {};
+    filter[filterCreator.name] = filterCreator.value;
+    let newFilter;
+    if (this.reset === true) {
+      newFilter = filterCreator.name === 'order' ? Object.assign(this.filter, filter) : Object.assign({order: this.filter.order}, filter);
+    } else {
+     newFilter = Object.assign(filter, this.filter);
+    }
+    this.filter = newFilter;
+    this.resultsService.filterResults(this.filter);
+    this.showFilters = false;
+  }
+
+  removeFilter(name) {
+    let filter = {};
+    filter = Object.keys(this.filter).reduce((object, key) => {
+      if (key !== name) {
+        object[key] = this.filter[key];
+      }
+      return object;
+    }, {});
+    this.resultsService.filterResults(this.filter);
+    this.showFilters = false;
   }
 }

@@ -1,10 +1,45 @@
-<div class="item-card">
-  <div class="row--between row">
-    <div class="col-4">
-      <!-- photo -->
+<div class="card" [ngSwitch]="item.id.kind">
+  <div *ngSwitchCase="'youtube#video'" class="video__card row row--start">
+    <div class="video__thumbnail col-6" (click) = "this.router.navigate(['video', item.id.videoId])">
+        <picture>
+          <source media="(min-width: 700px)" srcset={{item.snippet.thumbnails.default.url}}>
+          <img src={{item.snippet.thumbnails.medium.url}} width={{item.snippet.thumbnails.default.width}} height={{item.snippet.thumbnails.default.height}}/>
+        </picture>
     </div>
-    <div class="col-8">
-      <!-- <app-info-card></app-info-card> -->
+    <div class="video__info col-6">
+      <a (click) = "this.router.navigate(['video', item.id.videoId])"><h1>{{item.snippet.title}}</h1></a>
+      <a (click) = "this.router.navigate(['channel', item.snippet.channelId])"><h2>{{item.snippet.channelTitle}}</h2></a>
+      <!-- <h3>{{item.statistics.viewCount | number}} views</h3> -->
+  </div>
+  </div>
+
+<div (click) = "this.router.navigate(['channel', item.id.channelId])" *ngSwitchCase="'youtube#channel'" class="channel__card row--start row">
+    <div class="channel__thumbnail col-5">
+      <picture>
+        <source srcset={{item.snippet.thumbnails.default.url}}>
+         <img src={{item.snippet.thumbnails.medium.url}}/>
+      </picture>
+    </div>
+    <div class="channel__info col-7">
+      <a><h1>{{item.snippet.title}}</h1></a>
+      <!-- <a><h2>{{item.statistics.viewCount | number}} videos</h2></a> -->
+      <!-- <h3>{{item.snippet.subscriberCount | number}} subscribers</h3> -->
     </div>
   </div>
-</div>
+
+<div (click) = "this.router.navigate(['playlist', item.id.playlistId])" *ngSwitchCase="'youtube#playlist'" class="playlist__card row--start row">
+    <div class="playlist__thumbnail col-6">
+        <picture *ngIf="item.snippet.thumbnails">
+          <source srcset={{item.snippet.thumbnails?.default.url}}>
+          <img src={{item.snippet.thumbnails?.medium.url}}/>
+        </picture>
+      <div class="thumbnail__overlay">
+        <!-- <h1>{{item.statistics.videoCount}}</h1> -->
+        <i class="material-icons">playlist_play</i>
+      </div>
+    </div>
+    <div class="playlist__info col-5">
+      <h1>{{item.snippet.title}}</h1>
+      <h2>{{item.snippet.description}}</h2>
+    </div>
+  </div>

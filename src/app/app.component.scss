@@ -1,0 +1,8 @@
+@import 'utilities/mixins';
+
+:host {
+    height: calc(100% - 48px);
+    @include forLargeScreens('700px'){
+      height: calc(100% - 60px);
+    }
+}

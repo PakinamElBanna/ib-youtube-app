@@ -1,3 +1,10 @@
+export class FilterBluePrint {
+  constructor(public name, public value ){}
+  CreateFilter() {
+
+  }
+}
+
 export class Filter {
-  constructor(public name: string, public options: string[] ) {}
+  constructor(public name, public options: any[] ) {}
 }

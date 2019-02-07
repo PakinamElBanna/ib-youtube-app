@@ -1,9 +1,12 @@
-<div class="results">
-    <app-filters></app-filters>
-    <ul class="col-12">
-      <li><app-item-card [item]="{type: 'channel'}"></app-item-card></li>
-      <li><app-item-card></app-item-card></li>
-      <li><app-item-card></app-item-card></li>
-    </ul>
-      <!-- <app-loading class="col-12"></app-loading> -->
+<div *ngIf="results; else loading" class="results">
+    <app-filters [resetFilters] = "reset"
+                  [resultsCount]="results.pageInfo.totalResults">
+    </app-filters>
+    <app-list (loadMoreResults) = "this.onLoadMore(token)"
+              [items]="results?.items">
+    </app-list>
 </div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

@@ -6,6 +6,11 @@ export const environment = {
   production: false
 };
 
+export const apiBaseUrl = 'https://www.googleapis.com/youtube/v3/';
+
+// TODO: See if you can secure the key
+export const APIKEY = "AIzaSyDCkdwgP2B1IeDvKXRCjkz8eiw0zyvFVSE";
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

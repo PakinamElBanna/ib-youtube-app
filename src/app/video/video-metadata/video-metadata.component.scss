@@ -1,0 +1,44 @@
+@import 'utilities/variables';
+@import 'utilities/mixins';
+@import 'base/typography';
+
+.metadata {
+  color: $dark-grey;
+  &__titles {
+    h1 {
+        -webkit-line-clamp: 1;
+        max-height: 1.2em;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-height: 1.2em;
+        -webkit-box-orient: vertical;
+        font-weight: $font-weight-bold;
+        font-size: 1.1em;
+    }
+    h2 span {
+      font-size: 0.9em;
+      color: $subtitle;
+    }
+  }
+  &__statistics {
+    padding: 1em 0;
+    button {
+      @include btn-generator($dark-grey, none);
+      padding: 0.2em;
+      i {
+        margin-right: 3px;
+        font-size: 1em;
+      }
+    }
+  }
+  &__tools {
+    button {
+      @include btn-generator($dark-grey, none);
+      font-size: 1.5em;
+      i {
+        font-size: 1em;
+      }
+    }
+  }
+}

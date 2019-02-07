@@ -4,21 +4,10 @@ import { By } from '@angular/platform-browser';
 import { HeaderComponent } from './header.component';
 import { iterateListLike } from '@angular/core/src/change_detection/change_detection_util';
 
-class WindowRefService {
-  size = 900;
-  _window(): any {
-    return this.size;
-  }
-
-  nativeWindow() {
-    return this._window();
-  }
-}
-
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-
+  const searching = true;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ]
@@ -37,7 +26,7 @@ describe('HeaderComponent', () => {
   });
 
   it(`should always display the search input field if the app is running on desktop`, () => {
-    component.device = 'desktop';
+    component.deviceService.device = 'desktop';
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('.search__input'))).toBeTruthy();
   });
@@ -61,7 +50,7 @@ describe('HeaderComponent', () => {
   it('should change searching to true if the app is running on mobile and searching is set to false', () => {
     const button = fixture.debugElement.query(By.css('.search__button'));
     component.searching = false;
-    component.device = 'mobile';
+    component.deviceService.device = 'mobile';
     fixture.detectChanges();
     button.triggerEventHandler('click', {} as Event);
     fixture.detectChanges();
@@ -72,7 +61,7 @@ describe('HeaderComponent', () => {
   it('should call performSearch if the app is running on mobile and searching is set to true', () => {
     const button = fixture.debugElement.query(By.css('.search__button'));
     component.searching = true;
-    component.device = 'mobile';
+    component.deviceService.device = 'mobile';
     spyOn(component, 'performSearch').and.callThrough();
 
     button.triggerEventHandler('click', {} as Event);
@@ -81,12 +70,4 @@ describe('HeaderComponent', () => {
     expect(component.searching).toBeFalsy();
     expect(fixture.debugElement.query(By.css('.search__input'))).toBeNull();
   });
-
-  it('should trigger onResize method when window is resized', () => {
-    const spyOnResize = spyOn(component, 'getScreenSize');
-    window.dispatchEvent(new Event('resize'));
-    fixture.detectChanges();
-    expect(spyOnResize).toHaveBeenCalled();
-  });
-
 });

@@ -1,3 +1,25 @@
-<p>
-  video-metadata works!
-</p>
+<div class="metadata row">
+  <div class="metadata__titles col-12">
+    <h1>{{video.title}}</h1>
+    <h2 (click) = "this.router.navigate(['channel', video.channelId])">{{video.channelTitle}} <span>channel views</span></h2>
+  </div>
+  <div class="metadata__statistics row row--between col-12">
+    <div class="col-6 row row--start">
+      <button type="button">
+        <i class="material-icons">thumb_up</i>{{video.statistics.likeCount | numbersSuffix:2}}</button>
+      <button type="button">
+        <i class="material-icons">thumb_down</i>{{video.statistics.dislikeCount | numbersSuffix:2}}</button>
+    </div>
+    <div class="metadata__tools col-6 row row--end">
+      <button type="button">
+        <i class="material-icons">add</i>
+      </button>
+      <button type="button">
+        <i class="material-icons" style="transform: rotate(180deg) scaleY(-1);">reply</i>
+      </button>
+      <button type="button">
+        <i class="material-icons">flag</i>
+      </button>
+    </div>
+  </div>
+</div>

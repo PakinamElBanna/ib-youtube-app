@@ -1,16 +1,16 @@
 <div class="header">
-  <picture class="header__logo">
-    <source media="(min-width: 700px)" srcset="assets/images/logo.svg">
-    <img src="assets/images/mobile-logo.svg" />
-  </picture>
-  <form class="header__search">
+    <picture class="header__logo" (click) = "this.router.navigate([''])" >
+      <source media="(min-width: 700px)" srcset="assets/images/logo.svg">
+      <img src="assets/images/mobile-logo.svg" />
+    </picture>
+  <form class="header__search" (submit)="performSearch(searchInputValue)">
     <input *ngIf="searching; else title" class="search__input" #searchInputValue />
-    <button type="button" class="button search__button" (click)="onSearchClick($event)">
+    <button class="button search__button" (click)="onSearchClick($event)">
       <i class="material-icons">search</i>
     </button>
   </form>
 </div>
 
 <ng-template #title>
-  <h1 class="search__title">Title</h1>
+  <h1 class="search__title">{{dynamicTitle}}</h1>
 </ng-template>

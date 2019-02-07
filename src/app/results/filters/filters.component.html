@@ -1,16 +1,15 @@
 <div class="filters">
   <div class="row--start row" *ngIf="device === 'mobile'; else desktop">
-      <app-filter [device] = "device" class="filters__item col-4" *ngFor="let filter of mobileFilters" [filter]="filter"></app-filter>
+      <app-filter class="filters__item" *ngFor="let filter of mobileFilters" [filter]="filter" (filterSelected)="onFilterSelected($event)"></app-filter>
   </div>
 </div>
 
 <ng-template #desktop>
   <div class="filters__summary">
-    <!-- TODO: Fix hardcoded value -->
-    <span>About (HARDCODED) results</span>
+    <span class="summary__count">About {{resultsCount | number }} results</span>
     <button type="button" (click)="onFiltersClick($event)"><i class="material-icons">filter_list</i>filter</button>
   </div>
-  <div *ngIf="showFilters" class="filters__controls row">
-    <app-filter class="filters__item col-4" *ngFor="let filter of desktopFilters" [filter] = "filter"></app-filter>
+  <div [class.hide]="!showFilters" class="filters__controls row">
+    <app-filter class="filters__item col-4" *ngFor="let filter of desktopFilters" [filter] = "filter" (filterSelected)="onFilterSelected($event)" (filterRemoved)="removeFilter($event)"></app-filter>
   </div>
 </ng-template>

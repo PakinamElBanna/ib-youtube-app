@@ -1,0 +1,31 @@
+<div  *ngIf="channel; else loading">
+  <div class="channel__header">
+      <picture>
+        <source media="(min-width: 700px)" srcset={{channel.bannerDefaultImageUrl}}>
+        <img src={{channel.bannerMobileImageUrl}} />
+      </picture>
+    <div class="channel__avatar">
+      <picture>
+        <source media="(min-width: 700px)" srcset={{channel.thumbnails.medium.url}}>
+        <img src={{channel.thumbnails.default.url}} width={{channel.thumbnails.default.width}} height={{channel.thumbnails.default.height}}/>
+      </picture>
+    </div>
+  </div>
+  <div class="channel__title">
+    <h1 class="row">{{channel.title}}</h1>
+    <div class="channel__subscribe row row--start">
+      <div>
+        <button type="button">Subscribe</button>
+        <span>{{channel.statistics.subscriberCount | number}} subscribers</span>
+      </div>
+    </div>
+  </div>
+  <div class="channel__items">
+    <app-list (loadMoreResults) = "this.onLoadMore(token)" [items]="results?.items">
+    </app-list>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

@@ -1,5 +1,6 @@
-import { Component, Input, ElementRef, ViewChild } from '@angular/core';
-import { Filter } from './filter.model';
+import { Component, Input, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Filter, FilterBluePrint } from './filter.model';
+import { DeviceService } from '../../device.service';
 
 @Component({
   selector: 'app-filter',
@@ -8,21 +9,54 @@ import { Filter } from './filter.model';
 })
 export class FilterComponent {
 
+removed;
+
 @Input() filter: Filter;
-@Input() device: string;
+
+@Output() filterSelected = new EventEmitter<any>();
+@Output() filterRemoved = new EventEmitter<FilterBluePrint>();
 
   @ViewChild('filterInputValue') filterInputValueRef: ElementRef;
 
-  constructor() { }
+  constructor(public deviceService: DeviceService) { }
 
   onFilterChange(event) {
-    // add filter to service
+    let key = event.target.name === 'sortBy' ? 'order' : event.target.name;
+    let value = event.target.value;
+
+    if ( key === 'uploadDate') {
+      key = 'publishedAfter';
+      const date = new Date();
+
+      switch (value) {
+        case ('today') : {
+          value = (new Date()).toISOString();
+          break;
+        }
+        case ('thisWeek') : {
+          // Just before the previous week begins.
+          value = new Date(date.setDate(date.getDate() - 6)).toISOString();
+          break;
+        }
+        case('thisMonth') : {
+          // routerLinkJust before the previous month begins. I assumed 28 days
+          value = new Date(date.setDate(date.getDate() - 28)).toISOString();
+          break;
+        }
+        default: {
+          this.onFilterRemove('publishedAfter');
+        }
+      }
+    }
+
+    const filterCreator = new FilterBluePrint(key, value);
+    this.filterSelected.emit(filterCreator);
   }
 
-  onFilterRemove(event) {
-    console.log(this.filterInputValueRef.nativeElement.value);
-    this.filterInputValueRef.nativeElement.checked = false;
-    // remove filter from service
+  onFilterRemove(name) {
+    const filterName = name === 'upload date' ? 'publishedAfter' : name;
+    this.filterRemoved.emit(filterName);
+    this.removed = name;
   }
 
 }
