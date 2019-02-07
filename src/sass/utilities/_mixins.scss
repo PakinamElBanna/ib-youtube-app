@@ -1,3 +1,6 @@
+@import 'base/typography';
+@import './variables';
+
 // Grid generator
 
 @mixin grid-generator($columns) {
@@ -99,6 +102,65 @@
   }
   background: $input-background;
   padding: 0 1em;
+}
+
+// Youtube card generator
+
+@mixin youtubeCard-generator() {
+    display: flex;
+    max-height: 9em;
+    max-width: 25em;
+}
+
+@mixin youtubeThumbnail-generator($type:'') {
+  height: auto;
+  position: relative;
+  img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+  @if $type == 'channel' {
+    img {
+      border-radius: 50%;
+      width: 7em;
+    }
+  }
+  @else {
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+@mixin youtubeInfo-generator($type:'') {
+  max-height: 4em;
+    @if $type == 'channel' {
+    align-self: center;
+  }
+  @else {
+
+  }
+  h1, h2, h3 {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   line-height: 1.2em;
+   -webkit-box-orient: vertical;
+   font-weight: $font-weight-regular;
+  }
+  h1 {
+   -webkit-line-clamp: 3;
+   max-height: 3.6em;
+   color: $black;
+  }
+  h2, h3 {
+   -webkit-line-clamp: 1;
+   max-height: 1.2em;
+   font-size: 0.9em;
+   color: $subtitle;
+  }
 }
 
 // Media queries generator

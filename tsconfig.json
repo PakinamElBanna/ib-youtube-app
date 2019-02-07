@@ -21,6 +21,9 @@
     "paths": {
       "@sass/*": [
         "app/sass/*"
+      ],
+      "@assets/*": [
+        "../assets"
       ]
     }
   }
