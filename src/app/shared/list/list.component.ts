@@ -8,15 +8,14 @@ import { DeviceService } from '../../device.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-
+device = this.deviceService.getScreenSize();
 @Input() items: any[];
 @Output() loadMoreResults = new EventEmitter();
 
   constructor(private resultsService: ResultsService,
-              private deviceService: DeviceService) {}
+              public deviceService: DeviceService) {}
 
   onLoadMore() {
-    if (this.deviceService.device === 'mobile') {
-       this.resultsService.loadMore(); }
+       this.resultsService.loadMore();
   }
 }

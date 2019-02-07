@@ -1,15 +1,36 @@
 <div class="filters">
-  <div class="row--start row" *ngIf="device === 'mobile'; else desktop">
-      <app-filter class="filters__item" *ngFor="let filter of mobileFilters" [filter]="filter" (filterSelected)="onFilterSelected($event)"></app-filter>
-  </div>
+  <form class="row--start row" *ngIf="device === 'mobile'; else desktop">
+    <div class="filters__item col-6">
+      <select name="upload date"
+              class="filter__picker"
+              (change)="onChange($event)">
+        <option *ngFor="let option of mobileFilters.publishedAfter"
+                [ngValue]="option"
+                >
+                {{option}}
+      </option>
+      </select>
+    </div>
+    <div class="filters__item col-6">
+      <select name="type"
+              class="filter__picker"
+              (change)="onChange($event)">
+        <option *ngFor="let option of mobileFilters.type"
+        [ngValue]="option"
+        >
+        {{option}}
+        </option>
+      </select>
+      </div>
+   </form>
 </div>
 
 <ng-template #desktop>
-  <div class="filters__summary">
+  <!-- <div class="filters__summary">
     <span class="summary__count">About {{resultsCount | number }} results</span>
     <button type="button" (click)="onFiltersClick($event)"><i class="material-icons">filter_list</i>filter</button>
   </div>
   <div [class.hide]="!showFilters" class="filters__controls row">
     <app-filter class="filters__item col-4" *ngFor="let filter of desktopFilters" [filter] = "filter" (filterSelected)="onFilterSelected($event)" (filterRemoved)="removeFilter($event)"></app-filter>
-  </div>
+  </div> -->
 </ng-template>

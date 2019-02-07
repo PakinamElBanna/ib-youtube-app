@@ -10,10 +10,7 @@ export class DeviceService {
   device = 'mobile';
 
   getScreenSize(event?) {
-    if (window.innerWidth >= 700 ) {
-      this.device = 'desktop';
-    } else {
-      this.device = 'mobile';
-    }
+    const device = window.innerWidth >= 700 ? 'desktop' : 'mobile';
+    return device;
   }
 }

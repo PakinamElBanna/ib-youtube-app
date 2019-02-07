@@ -1,4 +1,4 @@
-import { Injectable, Query } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Result, PageInfo } from './results/result.model';
 import { DataService } from '../services/data.service';
@@ -19,10 +19,11 @@ export class ResultsService {
   constructor(private dataService: DataService) { }
 
   searchYoutube(query) {
+    debugger
     this.setQuery(query);
     this.dataService.search(this.query)
         .subscribe(
-          (results: Result) => this.setResult(results, query),
+          (results: Result) => this.setResult(results),
           (error) => console.log(error)
           );
   }

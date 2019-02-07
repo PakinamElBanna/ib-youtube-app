@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Filter, FilterBluePrint } from '../../shared/filter/filter.model';
 import { NgForOfContext } from '@angular/common';
-import { FilterComponent } from '../../shared/filter/filter.component';
 import { ResultsService } from '../results.service';
+import { DeviceService } from '../../device.service';
 
 @Component({
   selector: 'app-filters',
@@ -14,51 +13,69 @@ export class FiltersComponent {
   @Input() resetFilters: boolean;
 
   showFilters = false;
-  filter = {order: 'relevance'};
-  reset = false;
+  filters: any = { sort: 'relevance'};
+  device = this.deviceService.device;
 
-  mobileFilters = [
-    new Filter('type', ['all', 'channel', 'playlist']),
-    new Filter('upload date', ['anytime', 'today', 'this week', 'this month'])
-  ];
-  desktopFilters = [
-    new Filter('upload date', ['anytime', 'today', 'this week', 'this month']),
-    new Filter('type', ['all', 'channel', 'playlist']),
-    new Filter('sort by', ['relevance', 'date', 'view count'])
-  ];
+  mobileFilters = {
+    type: ['all', 'channel', 'playlist'],
+    publishedAfter: ['today', 'this week', 'this month']
+  };
 
-  constructor(private resultsService: ResultsService) {
-    this.resultsService.resetFilters.subscribe(reset => this.reset = reset);
+  desktopFilters = {
+    type: ['all', 'channel', 'playlist'],
+    publishedAfter: ['today', 'this week', 'this month'],
+    sort: ['relevance', 'date', 'view count']
+  };
+
+  constructor(
+    private resultsService: ResultsService,
+    public deviceService: DeviceService
+  ) {}
+
+  onChange(event) {
+    if (event.target.name === 'upload date') {
+      const date = new Date();
+      switch (event.target.value) {
+        case 'today': {
+          this.filters.publishedAfter = new Date().toISOString();
+          break;
+        }
+        case 'this week': {
+          // Just before the previous week begins.
+          this.filters.publishedAfter = new Date(
+            date.setDate(date.getDate() - 6)
+          ).toISOString();
+          break;
+        }
+        case 'this month': {
+          // just before the previous month begins. I assumed 28 days
+          this.filters.publishedAfter = new Date(
+            date.setDate(date.getDate() - 28)
+          ).toISOString();
+          break;
+        }
+      }
+    } else {
+      this.filters[event.target.name] = event.target.value;
+    }
+
+    return this.resultsService.filterResults(this.filters);
   }
 
   onFiltersClick(event) {
     this.showFilters = !this.showFilters;
   }
 
-
-  onFilterSelected(filterCreator: FilterBluePrint) {
-    const filter = {};
-    filter[filterCreator.name] = filterCreator.value;
-    let newFilter;
-    if (this.reset === true) {
-      newFilter = filterCreator.name === 'order' ? Object.assign(this.filter, filter) : Object.assign({order: this.filter.order}, filter);
-    } else {
-     newFilter = Object.assign(filter, this.filter);
-    }
-    this.filter = newFilter;
-    this.resultsService.filterResults(this.filter);
-    this.showFilters = false;
-  }
-
   removeFilter(name) {
-    let filter = {};
-    filter = Object.keys(this.filter).reduce((object, key) => {
+    const filters = Object.keys(this.filters).reduce((object, key) => {
       if (key !== name) {
-        object[key] = this.filter[key];
+        object[key] = this.filters[key];
       }
       return object;
     }, {});
-    this.resultsService.filterResults(this.filter);
+    this.filters = filters;
     this.showFilters = false;
+    return this.resultsService.filterResults(this.filters);
+
   }
 }
