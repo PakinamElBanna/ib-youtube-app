@@ -8,7 +8,6 @@ import { DeviceService } from '../../device.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent {
-device = this.deviceService.getScreenSize();
 @Input() items: any[];
 @Output() loadMoreResults = new EventEmitter();
 

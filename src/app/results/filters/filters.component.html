@@ -1,5 +1,5 @@
 <div class="filters">
-  <form class="row--start row" *ngIf="device === 'mobile'; else desktop">
+  <form class="row--start row" *ngIf="deviceService.getScreenSize() === 'mobile'; else desktop">
     <div class="filters__item col-6">
       <select name="upload date"
               class="filter__picker"
@@ -26,11 +26,10 @@
 </div>
 
 <ng-template #desktop>
-  <!-- <div class="filters__summary">
+  <div class="filters__summary">
     <span class="summary__count">About {{resultsCount | number }} results</span>
     <button type="button" (click)="onFiltersClick($event)"><i class="material-icons">filter_list</i>filter</button>
   </div>
   <div [class.hide]="!showFilters" class="filters__controls row">
-    <app-filter class="filters__item col-4" *ngFor="let filter of desktopFilters" [filter] = "filter" (filterSelected)="onFilterSelected($event)" (filterRemoved)="removeFilter($event)"></app-filter>
-  </div> -->
+  </div>
 </ng-template>

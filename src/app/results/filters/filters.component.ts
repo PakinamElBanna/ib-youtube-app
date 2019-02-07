@@ -9,12 +9,12 @@ import { DeviceService } from '../../device.service';
   styleUrls: ['./filters.component.scss']
 })
 export class FiltersComponent {
+
   @Input() resultsCount: number;
   @Input() resetFilters: boolean;
 
   showFilters = false;
-  filters: any = { sort: 'relevance'};
-  device = this.deviceService.device;
+  filters: any = { sort: 'relevance' };
 
   mobileFilters = {
     type: ['all', 'channel', 'playlist'],
@@ -58,7 +58,6 @@ export class FiltersComponent {
     } else {
       this.filters[event.target.name] = event.target.value;
     }
-
     return this.resultsService.filterResults(this.filters);
   }
 
