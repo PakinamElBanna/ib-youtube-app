@@ -16,7 +16,6 @@ export class ListComponent {
               private deviceService: DeviceService) {}
 
   onLoadMore() {
-    if (this.deviceService.device === 'mobile') {
-       this.resultsService.loadMore(); }
+       this.resultsService.loadMore();
   }
 }

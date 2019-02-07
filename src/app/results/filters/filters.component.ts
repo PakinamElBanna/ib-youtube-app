@@ -3,6 +3,7 @@ import { Filter, FilterBluePrint } from '../../shared/filter/filter.model';
 import { NgForOfContext } from '@angular/common';
 import { FilterComponent } from '../../shared/filter/filter.component';
 import { ResultsService } from '../results.service';
+import { DeviceService } from '../../device.service';
 
 @Component({
   selector: 'app-filters',
@@ -27,7 +28,8 @@ export class FiltersComponent {
     new Filter('sort by', ['relevance', 'date', 'view count'])
   ];
 
-  constructor(private resultsService: ResultsService) {
+  constructor(private resultsService: ResultsService,
+              public  deviceService: DeviceService) {
     this.resultsService.resetFilters.subscribe(reset => this.reset = reset);
   }
 

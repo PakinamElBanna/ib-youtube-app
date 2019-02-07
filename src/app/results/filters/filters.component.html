@@ -1,5 +1,5 @@
 <div class="filters">
-  <div class="row--start row" *ngIf="device === 'mobile'; else desktop">
+  <div class="row--start row" *ngIf="this.deviceService.device === 'mobile'; else desktop">
       <app-filter class="filters__item" *ngFor="let filter of mobileFilters" [filter]="filter" (filterSelected)="onFilterSelected($event)"></app-filter>
   </div>
 </div>
