@@ -17,7 +17,7 @@ export class HeaderComponent {
 
   @ViewChild('searchInputValue') searchInputValueRef: ElementRef;
 
-  searching = false;
+  searching = this.deviceService.getScreenSize() === 'desktop';
   dynamicTitle = 'Youtube';
 
     constructor(private router: Router,
