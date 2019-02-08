@@ -1,4 +1,4 @@
-<ul *ngIf="deviceService.getScreenSize() === 'desktop';else mobile" class="col-12" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="2000" (scrolled)="onLoadMore()">
+<ul [class.playlist]="type=='playlist'" *ngIf="deviceService.getScreenSize() === 'desktop';else mobile" class="col-12" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="2000" (scrolled)="onLoadMore()">
   <li *ngFor="let item of items">
     <app-item-card [item]="item"></app-item-card>
   </li>
@@ -10,7 +10,7 @@
       <app-item-card [item]="item"></app-item-card>
     </li>
   </ul>
-  <app-load-more (loadMoreResults)="onLoadMore()">
+  <app-load-more *ngIf="type == 'videos'" (loadMoreResults)="onLoadMore()">
   </app-load-more>
 </ng-template>
 

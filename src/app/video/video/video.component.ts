@@ -14,8 +14,12 @@ import { ResultsService } from '../../results/results.service';
 export class VideoComponent implements OnInit, OnDestroy {
   video: Video;
   results: Result;
+  playlistResults: Result;
   videoUrl: string;
-  relatedVideoQuery = {relatedToVideoId: null};
+  relatedVideoQuery = { relatedToVideoId: null };
+  relatedPlaylistQuery = { relatedToPlaylistId: null };
+  videoQuery = { videoId: null };
+  playListQuery = { playListId: null };
   query;
 
   constructor(
@@ -24,16 +28,8 @@ export class VideoComponent implements OnInit, OnDestroy {
     private resultsService: ResultsService
   ) {
     this.query = this.route.snapshot.params;
-    this.videoService.getVideo(this.query);
-
-    this.route.paramMap.subscribe((params: Params) => {
-      this.query = this.route.snapshot.params;
-      this.videoUrl = `https://www.youtube.com/embed/${
-        this.query.id
-      }?autoplay=1`;
-      this.videoService.getVideo(this.query);
-      this.relatedVideoQuery.relatedToVideoId = this.query.id;
-      this.videoService.getRelatedVideos(this.relatedVideoQuery);
+    this.route.queryParams.subscribe((params: Params) => {
+      params.type === 'playlist' ? this.getRelatedPlaylist(params) : this.getVideo(params);
     });
   }
 
@@ -43,9 +39,30 @@ export class VideoComponent implements OnInit, OnDestroy {
     });
 
     this.resultsService.resultsChanged.subscribe((results: Result) => {
-      console.log('changed')
       this.results = results;
     });
+
+    this.resultsService.playlistResultsChanged.subscribe((results: Result) => {
+      this.playlistResults = results;
+    });
+  }
+
+  getVideo(params) {
+    const videoQuery = this.videoQuery;
+    const relatedVideoQuery = this.relatedVideoQuery;
+    videoQuery.videoId = params.videoId;
+    relatedVideoQuery.relatedToVideoId = params.id;
+    videoQuery.videoId = params.id;
+    this.videoUrl = `https://www.youtube.com/embed/${params.id}?autoplay=1`;
+    this.videoService.getVideo(videoQuery);
+    this.videoService.getRelatedVideos(relatedVideoQuery);
+    // this.getRelatedPlaylist(videoQuery.videoId);
+  }
+
+  getRelatedPlaylist(params) {
+    const playListQuery = this.playListQuery;
+    playListQuery.playListId = params.playlistId;
+    this.videoService.getRelatedPlaylists(playListQuery);
   }
 
   ngOnDestroy() {

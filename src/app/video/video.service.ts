@@ -18,8 +18,8 @@ export class VideoService {
     private resultsService: ResultsService
   ) {}
 
-  getVideo(id) {
-    this.dataService.fetchVideo(id).subscribe((response: any) => {
+  getVideo(query) {
+    this.dataService.fetchVideo(query).subscribe((response: any) => {
       this.setVideo(response.items[0]);
     });
   }
@@ -32,7 +32,12 @@ export class VideoService {
   getRelatedVideos(query) {
     this.dataService.fetchVideos(query).subscribe((response: any) => {
       this.resultsService.resultsChanged.next(response.items);
-      console.log(query)
+    });
+  }
+
+  getRelatedPlaylists(id) {
+    this.dataService.fetchPlaylists(id).subscribe((response: any) => {
+      this.resultsService.playlistResultsChanged.next(response.items);
     });
   }
 }

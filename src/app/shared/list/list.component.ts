@@ -9,6 +9,7 @@ import { DeviceService } from '../../device.service';
 })
 export class ListComponent {
 @Input() items: any[];
+@Input() type: string;
 @Output() loadMoreResults = new EventEmitter();
 
   constructor(private resultsService: ResultsService,

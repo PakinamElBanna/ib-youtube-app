@@ -4,11 +4,13 @@ import { Result, PageInfo } from './results/result.model';
 import { DataService } from '../services/data.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ResultsService {
   results: Result;
+  playlistresults: Result;
   resultsChanged = new Subject<Result>();
+  playlistResultsChanged = new Subject<Result>();
   resetFilters = new Subject<boolean>();
 
   query;
@@ -16,19 +18,23 @@ export class ResultsService {
 
   private pageInfo: PageInfo;
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService) {}
 
   searchYoutube(query) {
     this.setQuery(query);
-    this.dataService.search(this.query)
-        .subscribe(
-          (results: Result) => this.setResult(results),
-          (error) => console.log(error)
-          );
+    this.dataService
+      .search(this.query)
+      .subscribe(
+        (results: Result) => this.setResult(results),
+        error => console.log(error)
+      );
   }
 
   loadMore() {
-    const query = Object.assign({pageToken: this.results.nextPageToken}, this.query);
+    const query = Object.assign(
+      { pageToken: this.results.nextPageToken },
+      this.query
+    );
     this.dataService
       .search(query)
       .subscribe(
@@ -53,10 +59,18 @@ export class ResultsService {
   }
 
   setResult(results: Result, filter = {}) {
-    const reset = filter.hasOwnProperty('type') || filter.hasOwnProperty('publishedAfter') ? true : this.query.hasOwnProperty('order');
+    const reset =
+      filter.hasOwnProperty("type") || filter.hasOwnProperty("publishedAfter")
+        ? true
+        : this.query.hasOwnProperty("order");
     this.resetFilters.next(reset);
     this.results = new Result(results);
     this.resultsChanged.next(this.results);
+  }
+
+  setPlaylistResults(results: Result, filter = {}) {
+    this.playlistresults = new Result(results);
+    this.playlistResultsChanged.next(this.playlistresults);
   }
 
   appendResult(results: Result) {

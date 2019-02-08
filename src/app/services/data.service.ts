@@ -30,8 +30,8 @@ export class DataService {
       );
   }
 
-  fetchVideo(id) {
-    this.generateParams('video', id);
+  fetchVideo(query) {
+    this.generateParams('video', query);
     return this.http
       .get(`${apiBaseUrl}videos`, {
         params: this.params
@@ -67,10 +67,28 @@ export class DataService {
       );
   }
 
-  fetchChannel(id) {
-    this.generateParams('channel', id);
+  fetchChannel(query) {
+    this.generateParams('channel', query);
     return this.http
       .get(`${apiBaseUrl}channels`, {
+        params: this.params
+      })
+      .pipe(
+        retry(3),
+        map(response => {
+          const data = response;
+          return data;
+        }),
+        catchError((error: Response) => {
+          return throwError(this.error);
+        })
+      );
+  }
+
+  fetchPlaylists(query) {
+          this.generateParams('playlist', query);
+          return this.http
+      .get(`${apiBaseUrl}playlistItems`, {
         params: this.params
       })
       .pipe(
@@ -91,10 +109,10 @@ export class DataService {
       case 'video': {
         params = {
           key: APIKEY,
-          fields:
-            'items(snippet(title,channelId,channelTitle,publishedAt),statistics(viewCount,likeCount,dislikeCount))',
+          fields: 'items(snippet(title,channelId,channelTitle,publishedAt),statistics(viewCount,likeCount,dislikeCount))',
           part: 'snippet,statistics',
           type: 'video',
+          maxResults: 10,
           id: query.id
         };
         break;
@@ -105,16 +123,24 @@ export class DataService {
           fields: 'nextPageToken,pageInfo,items(snippet,id)',
           part: 'snippet',
           type: 'video',
-          relatedToVideoId: query.relatedToVideoId
+          maxResults: 10,
+          query
+        };
+        break;
+      }
+      case 'playlist': {
+        params = {
+          key: APIKEY,
+          fields: 'nextPageToken,pageInfo,items(snippet,id)',
+          part: 'snippet',
+          type: 'playlist',
         };
         break;
       }
       case 'channel': {
         params = {
           key: APIKEY,
-          // tslint:disable-next-line:max-line-length
-          fields:
-            'items(statistics,snippet(publishedAt,thumbnails(default,medium)),statistics(viewCount,subscriberCount, videoCount),brandingSettings(channel(title,description),image(bannerMobileImageUrl,bannerImageUrl)))',
+          fields: 'items(statistics,snippet(publishedAt,thumbnails(default,medium)),statistics(viewCount,subscriberCount, videoCount),brandingSettings(channel(title,description),image(bannerMobileImageUrl,bannerImageUrl)))',
           part: 'snippet,statistics,contentDetails,brandingSettings',
           type: 'channel',
           id: query.id
@@ -126,7 +152,7 @@ export class DataService {
         params = {
           key: APIKEY,
           maxResults: 10,
-          fields: 'nextPageToken,pageInfo,items(snippet,id)',
+          fields: 'nextPageToken,pageInfo,items(snippet,id,kind)',
           part: 'snippet'
         };
         break;

@@ -1,6 +1,6 @@
 <div class="card" [ngSwitch]="item.id.kind">
   <div *ngSwitchCase="'youtube#video'" class="video__card row row--start">
-    <div class="video__thumbnail col-6" (click) = "this.router.navigate(['video', item.id.videoId])">
+    <div class="video__thumbnail col-6" (click) = "navigateToView('video','videoId','relatedToVideoId', item.id.videoId)">
         <picture>
           <source media="(min-width: 700px)" srcset={{item.snippet.thumbnails.default.url}}>
           <img src={{item.snippet.thumbnails.medium.url}} width={{item.snippet.thumbnails.default.width}} height={{item.snippet.thumbnails.default.height}}/>
@@ -13,7 +13,7 @@
   </div>
   </div>
 
-<div (click) = "this.router.navigate(['channel', item.id.channelId])" *ngSwitchCase="'youtube#channel'" class="channel__card row--start row">
+<div (click) = "navigateToView('channel','channelId','relatedToChannelId',item.id.channelId)" *ngSwitchCase="'youtube#channel'" class="channel__card row--start row">
     <div class="channel__thumbnail col-5">
       <picture>
         <source srcset={{item.snippet.thumbnails.default.url}}>
@@ -22,19 +22,19 @@
     </div>
     <div class="channel__info col-7">
       <a><h1>{{item.snippet.title}}</h1></a>
-      <!-- <a><h2>{{item.statistics.viewCount | number}} videos</h2></a> -->
-      <!-- <h3>{{item.snippet.subscriberCount | number}} subscribers</h3> -->
+      <a><h2>{{item.snippet?.statistics?.viewCount | number}} videos</h2></a>
+      <h3>{{item.snippet?.statistics?.subscriberCount | number}} subscribers</h3>
     </div>
   </div>
 
-<div (click) = "this.router.navigate(['playlist', item.id.playlistId])" *ngSwitchCase="'youtube#playlist'" class="playlist__card row--start row">
+<div  *ngSwitchCase="'youtube#playlist'" class="playlist__card row--start row">
     <div class="playlist__thumbnail col-6">
         <picture *ngIf="item.snippet.thumbnails">
           <source srcset={{item.snippet.thumbnails?.default.url}}>
           <img src={{item.snippet.thumbnails?.medium.url}}/>
         </picture>
       <div class="thumbnail__overlay">
-        <!-- <h1>{{item.statistics.videoCount}}</h1> -->
+        <h1>{{item.statistics?.videoCount}}</h1>
         <i class="material-icons">playlist_play</i>
       </div>
     </div>
