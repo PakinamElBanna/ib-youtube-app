@@ -104,13 +104,11 @@ export class DataService {
   }
 
   generateParams(type: string, query) {
-    debugger
     let params;
     switch (type) {
       case 'video': {
         params = {
           key: APIKEY,
-          fields: 'snippet(title,channelId,channelTitle,publishedAt),statistics(viewCount,likeCount,dislikeCount)',
           part: 'snippet,statistics',
           type: 'video',
           id: query.videoId
@@ -120,7 +118,7 @@ export class DataService {
       case 'videos': {
         params = {
           key: APIKEY,
-          fields: 'nextPageToken,pageInfo,items(snippet,id)',
+          fields: 'nextPageToken,pageInfo,items',
           part: 'snippet',
           type: 'video',
           id: query.videoId

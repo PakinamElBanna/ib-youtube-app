@@ -7,7 +7,7 @@
         </picture>
     </div>
     <div class="video__info col-6">
-      <a (click) = "this.router.navigate(['video', item.id.videoId])"><h1>{{item.snippet.title}}</h1></a>
+      <a (click) = "navigateToView('video','videoId','relatedToVideoId', item.id.videoId)"><h1>{{item.snippet.title}}</h1></a>
       <a (click) = "this.router.navigate(['channel', item.snippet.channelId])"><h2>{{item.snippet.channelTitle}}</h2></a>
       <!-- <h3>{{item.statistics.viewCount | number}} views</h3> -->
   </div>

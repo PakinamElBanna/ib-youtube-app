@@ -27,8 +27,9 @@ export class VideoComponent implements OnInit, OnDestroy {
     private videoService: VideoService,
     private resultsService: ResultsService
   ) {
-    this.query = this.route.snapshot.params;
+
     this.route.queryParams.subscribe((params: Params) => {
+      this.query = this.route.snapshot.params;
       params.type === 'playlist' ? this.getRelatedPlaylist(params) : this.getVideo(params);
     });
   }
