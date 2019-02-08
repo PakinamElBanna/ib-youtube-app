@@ -7,14 +7,15 @@ import { Result } from '../../results/results/result.model';
 import { ResultsService } from '../../results/results.service';
 
 @Component({
-  selector: 'app-video',
-  templateUrl: './video.component.html',
-  styleUrls: ['./video.component.scss']
+  selector: "app-video",
+  templateUrl: "./video.component.html",
+  styleUrls: ["./video.component.scss"]
 })
 export class VideoComponent implements OnInit, OnDestroy {
   video: Video;
   results: Result;
   videoUrl: string;
+  relatedVideoQuery = {relatedToVideoId: null};
   query;
 
   constructor(
@@ -22,30 +23,29 @@ export class VideoComponent implements OnInit, OnDestroy {
     private videoService: VideoService,
     private resultsService: ResultsService
   ) {
+    this.query = this.route.snapshot.params;
+    this.videoService.getVideo(this.query);
 
-     this.query = this.route.snapshot.params;
-     this.videoService.getVideo(this.query);
-
-     this.route.paramMap.subscribe((params: Params) => {
+    this.route.paramMap.subscribe((params: Params) => {
       this.query = this.route.snapshot.params;
-      this.videoUrl = `https://www.youtube.com/embed/${this.query.id}?autoplay=1`;
+      this.videoUrl = `https://www.youtube.com/embed/${
+        this.query.id
+      }?autoplay=1`;
       this.videoService.getVideo(this.query);
-
+      this.relatedVideoQuery.relatedToVideoId = this.query.id;
+      this.videoService.getRelatedVideos(this.relatedVideoQuery);
     });
-
   }
 
   ngOnInit() {
-    this.videoService.videoChanged.subscribe(
-      (video: Video) => {
+    this.videoService.videoChanged.subscribe((video: Video) => {
       this.video = video;
     });
 
-    this.resultsService.resultsChanged.subscribe(
-      (results: Result) => {
-        this.results = new Result(results);
-      }
-    );
+    this.resultsService.resultsChanged.subscribe((results: Result) => {
+      console.log('changed')
+      this.results = results;
+    });
   }
 
   ngOnDestroy() {

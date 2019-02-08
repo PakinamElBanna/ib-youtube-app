@@ -29,8 +29,10 @@ export class VideoService {
     this.videoChanged.next(this.video);
   }
 
-  getRelatedVideos(id) {
-    const query = { videoId: id };
-    this.resultsService.searchYoutube(query);
+  getRelatedVideos(query) {
+    this.dataService.fetchVideos(query).subscribe((response: any) => {
+      this.resultsService.resultsChanged.next(response.items);
+      console.log(query)
+    });
   }
 }
