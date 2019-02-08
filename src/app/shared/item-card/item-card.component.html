@@ -1,14 +1,14 @@
 <div class="card" [ngSwitch]="item.id.kind">
   <div *ngSwitchCase="'youtube#video'" class="video__card row row--start">
-    <div class="video__thumbnail col-6" (click) = "navigateToView('video','videoId','relatedToVideoId', item.id.videoId)">
+    <div class="video__thumbnail col-6" (click) = "navigateToView('video','videoId','relatedToVideoId', item.id)">
         <picture>
           <source media="(min-width: 700px)" srcset={{item.snippet.thumbnails.default.url}}>
           <img src={{item.snippet.thumbnails.medium.url}} width={{item.snippet.thumbnails.default.width}} height={{item.snippet.thumbnails.default.height}}/>
         </picture>
     </div>
     <div class="video__info col-6">
-      <a (click) = "navigateToView('video','videoId','relatedToVideoId', item.id.videoId)"><h1>{{item.snippet.title}}</h1></a>
-      <a (click) = "this.router.navigate(['channel', item.snippet.channelId])"><h2>{{item.snippet.channelTitle}}</h2></a>
+      <a (click) = "navigateToView('video','videoId','relatedToVideoId', item.id)"><h1>{{item.snippet.title}}</h1></a>
+      <a (click) = "navigateToView('channel','channelId','relatedToChannelId',item.snippet.channelId)"><h2>{{item.snippet.channelTitle}}</h2></a>
       <!-- <h3>{{item.statistics.viewCount | number}} views</h3> -->
   </div>
   </div>
