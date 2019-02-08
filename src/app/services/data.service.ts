@@ -109,6 +109,7 @@ export class DataService {
       case 'video': {
         params = {
           key: APIKEY,
+          fields: 'items(snippet,statistics)',
           part: 'snippet,statistics',
           type: 'video',
           id: query.videoId
@@ -149,7 +150,7 @@ export class DataService {
         params = {
           key: APIKEY,
           maxResults: 10,
-          fields: 'nextPageToken,pageInfo,items(snippet,id)',
+          fields: 'nextPageToken,pageInfo,items',
           part: 'snippet'
         };
         break;
