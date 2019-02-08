@@ -15,6 +15,8 @@ Assumptions:
 
  - Just to satisfy the provided requirements, the user is immediately redirected to the search page, which fires a search function on init and populates the videos list
 
+ - The project is continuously being updated and refactored. 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
 
 ## Development server

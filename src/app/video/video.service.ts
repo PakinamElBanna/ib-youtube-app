@@ -25,6 +25,7 @@ export class VideoService {
   }
 
   setVideo(video) {
+    debugger
     this.video = new Video(video);
     this.videoChanged.next(this.video);
   }

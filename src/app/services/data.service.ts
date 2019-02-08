@@ -104,16 +104,16 @@ export class DataService {
   }
 
   generateParams(type: string, query) {
+    debugger
     let params;
     switch (type) {
       case 'video': {
         params = {
           key: APIKEY,
-          fields: 'items(snippet(title,channelId,channelTitle,publishedAt),statistics(viewCount,likeCount,dislikeCount))',
+          fields: 'snippet(title,channelId,channelTitle,publishedAt),statistics(viewCount,likeCount,dislikeCount)',
           part: 'snippet,statistics',
           type: 'video',
-          maxResults: 10,
-          id: query.id
+          id: query.videoId
         };
         break;
       }
@@ -123,8 +123,7 @@ export class DataService {
           fields: 'nextPageToken,pageInfo,items(snippet,id)',
           part: 'snippet',
           type: 'video',
-          maxResults: 10,
-          query
+          id: query.videoId
         };
         break;
       }
@@ -152,7 +151,7 @@ export class DataService {
         params = {
           key: APIKEY,
           maxResults: 10,
-          fields: 'nextPageToken,pageInfo,items(snippet,id,kind)',
+          fields: 'nextPageToken,pageInfo,items(snippet,id)',
           part: 'snippet'
         };
         break;
