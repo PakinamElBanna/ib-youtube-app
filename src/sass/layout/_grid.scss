@@ -2,7 +2,7 @@
 @import 'utilities/variables';
 
 .wrapper {
-    @include clearfix();
+    // @include clearfix();
     max-width: 70em;
     margin: 0 auto;
     @include forLargeScreens('700px') {

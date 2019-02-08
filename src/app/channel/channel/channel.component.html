@@ -21,7 +21,7 @@
     </div>
   </div>
   <div class="channel__items">
-    <app-list (loadMoreResults) = "this.onLoadMore(token)" [items]="results?.items">
+    <app-list (loadMoreResults) = "this.onLoadMore(token)" [type] = 'channel' [items]="results?.items">
     </app-list>
   </div>
 </div>

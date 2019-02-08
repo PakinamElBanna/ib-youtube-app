@@ -1,9 +1,9 @@
-<div class="card" [ngSwitch]="item.id.kind">
+<div class="card" [ngSwitch]="item.itemCardType">
   <div *ngSwitchCase="'youtube#video'" class="video__card row row--start">
     <div class="video__thumbnail col-6" (click) = "navigateToView('video','videoId','relatedToVideoId', item.id.videoId)">
         <picture>
-          <source media="(min-width: 700px)" srcset={{item.snippet.thumbnails.default.url}}>
-          <img src={{item.snippet.thumbnails.medium.url}} width={{item.snippet.thumbnails.default.width}} height={{item.snippet.thumbnails.default.height}}/>
+          <source media="(min-width: 700px)" srcset={{item.snippet.thumbnails?.default.url}}>
+          <img src={{item.snippet.thumbnails?.medium.url}} width={{item.snippet.thumbnails?.default.width}} height={{item.snippet.thumbnails?.default.height}}/>
         </picture>
     </div>
     <div class="video__info col-6">
@@ -13,11 +13,29 @@
   </div>
   </div>
 
+  <div *ngIf="'youtube#playlistItem'" class="video__card row row--start">
+    <div class="video__thumbnail col-6" (click)="navigateToView('video','videoId','relatedToVideoId', item.snippet.resourceId.videoId)">
+      <picture>
+        <source media="(min-width: 700px)" srcset={{item.snippet?.thumbnails?.default.url}}>
+        <img src={{item.snippet.thumbnails?.medium.url}} width={{item.snippet?.thumbnails?.default.width}} height={{item.snippet.thumbnails?.default.height}}/>
+      </picture>
+    </div>
+    <div class="video__info col-6">
+      <a (click)="navigateToView('video','videoId','relatedToVideoId', item.id.videoId)">
+        <!-- <h1>{{item.snippet.title}}</h1> -->
+      </a>
+      <a (click)="navigateToView('channel','channelId','relatedToChannelId',item.snippet.channelId)">
+        <h2>{{item.snippet.channelTitle}}</h2>
+      </a>
+      <!-- <h3>{{item.statistics.viewCount | number}} views</h3> -->
+    </div>
+  </div>
+
 <div (click) = "navigateToView('channel','channelId','relatedToChannelId',item.id.channelId)" *ngSwitchCase="'youtube#channel'" class="channel__card row--start row">
     <div class="channel__thumbnail col-5">
       <picture>
-        <source srcset={{item.snippet.thumbnails.default.url}}>
-         <img src={{item.snippet.thumbnails.medium.url}}/>
+        <source srcset={{item.snippet.thumbnails?.default.url}}>
+         <img src={{item.snippet.thumbnails?.medium.url}}/>
       </picture>
     </div>
     <div class="channel__info col-7">
@@ -28,7 +46,7 @@
   </div>
 
 <div  *ngSwitchCase="'youtube#playlist'" class="playlist__card row--start row">
-    <div class="playlist__thumbnail col-6">
+    <div (click) = "retrievePlaylist(item.id.playlistId)" class="playlist__thumbnail col-6">
         <picture *ngIf="item.snippet.thumbnails">
           <source srcset={{item.snippet.thumbnails?.default.url}}>
           <img src={{item.snippet.thumbnails?.medium.url}}/>
@@ -40,6 +58,7 @@
     </div>
     <div class="playlist__info col-5">
       <h1>{{item.snippet.title}}</h1>
+      <h2>{{item.snippet.channelTitle}}</h2>
       <h2>{{item.snippet.description}}</h2>
     </div>
   </div>

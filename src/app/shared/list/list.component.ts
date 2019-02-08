@@ -18,4 +18,8 @@ export class ListComponent {
   onLoadMore() {
        this.resultsService.loadMore();
   }
+
+  OnChanges(change) {
+    this.items = change.items.currentValue;
+  }
 }

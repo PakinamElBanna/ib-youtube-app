@@ -7,16 +7,15 @@ import { SharedModule } from '../shared/shared.module';
 import { ResultsService } from '../results/results.service';
 
 import { RouterModule, Routes, ActivatedRoute } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { HomeComponent } from '../home/home.component';
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, HomeComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule,
-    CoreRoutingModule,
-    FormsModule
+    CoreRoutingModule
   ],
   exports: [
     HeaderComponent

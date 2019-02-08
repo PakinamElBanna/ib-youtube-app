@@ -30,7 +30,7 @@ export class VideoComponent implements OnInit, OnDestroy {
 
     this.route.queryParams.subscribe((params: Params) => {
       this.query = this.route.snapshot.params;
-      params.type === 'playlist' ? this.getRelatedPlaylist(params) : this.getVideo(params);
+      if (params.idType === 'videoId') { this.getVideo(params); }
     });
   }
 
@@ -41,10 +41,6 @@ export class VideoComponent implements OnInit, OnDestroy {
 
     this.resultsService.resultsChanged.subscribe((results: Result) => {
       this.results = results;
-    });
-
-    this.resultsService.playlistResultsChanged.subscribe((results: Result) => {
-      this.playlistResults = results;
     });
   }
 

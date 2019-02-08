@@ -1,16 +1,25 @@
-<ul  *ngIf="deviceService.getScreenSize === 'desktop' ; else mobile" class="col-12" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="2000" (scrolled)="onLoadMore()">
-  <li *ngFor="let item of items">
-    <app-item-card [item]="item"></app-item-card>
-  </li>
-</ul>
-
-<ng-template #mobile>
-  <ul class="col-12">
+<div>
+  <app-filters *ngIf="type =='search'" [resetFilters]="reset">
+  </app-filters>
+  <ul *ngIf="deviceService.getScreenSize() === 'desktop' ; else mobile" class="col-12" infiniteScroll [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="2000" (scrolled)="onLoadMore()">
     <li *ngFor="let item of items">
       <app-item-card [item]="item"></app-item-card>
     </li>
   </ul>
-  <app-load-more *ngIf="type == 'videos'" (loadMoreResults)="onLoadMore()">
-  </app-load-more>
-</ng-template>
 
+  <ng-template #mobile>
+    <ul class="col-12">
+      <li *ngFor="let item of items">
+        <app-item-card [item]="item"></app-item-card>
+      </li>
+    </ul>
+    <app-load-more *ngIf="type == 'videos'" (loadMoreResults)="onLoadMore()">
+    </app-load-more>
+  </ng-template>
+</div>
+
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

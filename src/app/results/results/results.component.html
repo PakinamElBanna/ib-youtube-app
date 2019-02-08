@@ -1,12 +1,7 @@
-<div *ngIf="results; else loading" class="results">
-    <app-filters [resetFilters] = "reset"
-                  [resultsCount]="results.pageInfo.totalResults">
-    </app-filters>
+<div class="results">
+  <h1 *ngIf="deviceService.getScreenSize() === 'desktop'" class="results__count">About {{results.pageInfo.totalResults}} results</h1>
     <app-list (loadMoreResults) = "this.onLoadMore(token)"
+              [type] = "'search'"
               [items]="results?.items">
     </app-list>
 </div>
-
-<ng-template #loading>
-  <app-loading></app-loading>
-</ng-template>

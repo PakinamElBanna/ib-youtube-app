@@ -10,7 +10,6 @@ import { DeviceService } from '../../device.service';
 })
 export class FiltersComponent {
 
-  @Input() resultsCount: number;
   @Input() resetFilters: boolean;
 
   showFilters = false;

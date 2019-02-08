@@ -68,11 +68,6 @@ export class ResultsService {
     this.resultsChanged.next(this.results);
   }
 
-  setPlaylistResults(results: Result, filter = {}) {
-    this.playlistresults = new Result(results);
-    this.playlistResultsChanged.next(this.playlistresults);
-  }
-
   appendResult(results: Result) {
     this.results = new Result(this.results).appendItems(results);
     this.resultsChanged.next(this.results);

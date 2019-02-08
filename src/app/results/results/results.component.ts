@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Result } from './result.model';
 import { ResultsService } from '../results.service';
+import { DeviceService } from '../../device.service';
 
 @Component({
   selector: 'app-results',
@@ -13,6 +14,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
   results: Result;
 
   constructor(private route: ActivatedRoute,
+              public deviceService: DeviceService,
               private resultsService: ResultsService) {
 
     this.route.queryParams.subscribe((queryParams: Params) => {
@@ -25,7 +27,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.resultsService.resultsChanged.subscribe(
       (results: Result) => {
-        this.results = results;
+        this.results = new Result(results);
       }
     );
   }

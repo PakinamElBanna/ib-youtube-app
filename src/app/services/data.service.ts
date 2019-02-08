@@ -86,8 +86,8 @@ export class DataService {
   }
 
   fetchPlaylists(query) {
-          this.generateParams('playlist', query);
-          return this.http
+   this.generateParams('playlist', query);
+   return this.http
       .get(`${apiBaseUrl}playlistItems`, {
         params: this.params
       })
@@ -129,9 +129,9 @@ export class DataService {
       case 'playlist': {
         params = {
           key: APIKEY,
-          fields: 'nextPageToken,pageInfo,items(snippet,id)',
           part: 'snippet',
           type: 'playlist',
+          maxResults: 10
         };
         break;
       }

@@ -9,7 +9,7 @@ export const environment = {
 export const apiBaseUrl = 'https://www.googleapis.com/youtube/v3/';
 
 // TODO: See if you can secure the key
-export const APIKEY = "AIzaSyCAOAZ224NhzLPZwHnGb9w2JErnCHUKr0w";
+export const APIKEY = "AIzaSyDoja2649xHdFYZ_YJz502YG4EBAn0_V3Q";
 
 /*
  * For easier debugging in development mode, you can import the following file

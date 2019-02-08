@@ -9,6 +9,9 @@ import { ListComponent } from './list/list.component';
 import { NumbersSuffixPipe } from './numbers-suffix.pipe';
 import { SafeUrlPipe } from './safe-url.pipe';
 import { DeviceService } from '../device.service';
+import { VideoMetadataComponent } from '../video/video-metadata/video-metadata.component';
+import { FiltersComponent } from '../results/filters/filters.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,24 +20,25 @@ import { DeviceService } from '../device.service';
     CamelCasePipe,
     NumbersSuffixPipe,
     LoadMoreComponent,
+    VideoMetadataComponent,
+    FiltersComponent,
     ListComponent,
-    SafeUrlPipe],
-  imports: [
-    CommonModule,
-    InfiniteScrollModule
+    SafeUrlPipe
   ],
+  imports: [CommonModule, FormsModule, InfiniteScrollModule],
   exports: [
     LoadingComponent,
     ItemCardComponent,
     CamelCasePipe,
+    FormsModule,
     NumbersSuffixPipe,
     LoadMoreComponent,
+    VideoMetadataComponent,
+    FiltersComponent,
     InfiniteScrollModule,
     ListComponent,
     SafeUrlPipe
   ],
-  providers: [
-    DeviceService
-  ]
+  providers: [DeviceService]
 })
-export class SharedModule { }
+export class SharedModule {}

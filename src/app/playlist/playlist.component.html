@@ -1,0 +1,6 @@
+<div class="playlist">
+  <iframe id="ytplayer" type="text/html" width="400px" height="50%" [src]="this.videoUrl | safeUrl" frameborder="0"></iframe>
+  <div class="playlist">
+    <app-list [items]="results?.items"></app-list>
+  </div>
+</div>
