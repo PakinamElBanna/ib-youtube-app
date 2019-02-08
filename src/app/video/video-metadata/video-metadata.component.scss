@@ -25,7 +25,7 @@
     padding: 1em 0;
     button {
       @include btn-generator($dark-grey, none);
-      padding: 0.2em;
+      padding: 1px;
       i {
         margin-right: 3px;
         font-size: 1em;
