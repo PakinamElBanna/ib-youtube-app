@@ -1,5 +1,9 @@
 # YoutubeApp
 
+Note:
+
+- You might want to add aN API KEY in environment.ts
+
 Assumptions:
 
  - Assuming a big, scalable app, each significant router location is treated as a potential big feature, Hence:
