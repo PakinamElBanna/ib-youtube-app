@@ -1,13 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from "@angular/router";
-import { DataService } from "../services/data.service";
+import { ActivatedRoute, Params } from '@angular/router';
+import { DataService } from '../services/data.service';
 import { Subject } from 'rxjs';
-import { Result } from '../../results/results/result.model';
 import { Video } from './video/video.model';
 import { ResultsService } from '../results/results.service';
+import { Result } from '../results/results/result.model';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class VideoService {
   video: Video;

@@ -110,7 +110,6 @@ export class DataService {
     }).pipe(
       retry(3),
       map(response => {
-        debugger;
         const data = response;
         return data;
       }),
