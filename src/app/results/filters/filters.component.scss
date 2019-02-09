@@ -9,8 +9,11 @@
   &__summary {
     display: flex;
     justify-content: space-between;
-    min-height: 4em;
     align-items: center;
+    min-height: 4em;
+    color: $dark_grey;
+    width: 100%;
+    padding: 1em;
     button {
       @include btn-generator($dark_grey, none);
       text-transform: uppercase;
@@ -47,3 +50,68 @@
     padding: 0 1em;
   }
  }
+
+  .radio-label, .radio-label--checkbox {
+  width: 80%;
+  position: relative;
+  margin: 1em 0;
+  display: flex;
+  color: $subtitle;
+  font-weight: $font-weight-regular;
+  justify-content: space-between;
+  justify-items: center;
+  flex: 1;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.radio {
+  margin: 0.5rem;
+  input{
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    &:checked {
+      + .radio-label {
+        color: $black;
+        font-weight: $font-weight-bold;
+        &--checkbox {
+          color: $black;
+          font-weight: $font-weight-bold;
+          &:after {
+            color: $dark_grey;
+            content: 'X';
+          }
+
+        }
+      }
+    }
+    &:not(:checked){
+      &--checkbox {
+        &:after {
+          content: '';
+        }
+      }
+
+    }
+    &:focus {
+      + .radio-label {
+        color: $black;
+        font-weight: $font-weight-bold;
+        &:after {
+          outline: none;
+          content: '';
+        }
+      }
+    }
+    + .radio-label {
+      &:empty {
+        &:after {
+          content: '';
+          // margin-right: 0;
+        }
+      }
+    }
+  }
+}

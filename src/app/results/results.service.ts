@@ -42,7 +42,7 @@ export class ResultsService {
   }
 
   filterResults(filter) {
-    const query = Object.assign(this.query, filter);
+    const query = Object.assign(filter);
     this.dataService
       .search(query)
       .subscribe(
