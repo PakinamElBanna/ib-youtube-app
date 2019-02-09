@@ -3,7 +3,6 @@
 @import 'base/typography';
 
 .channel__header {
-  background: $dark-grey;
   width: 100%;
   position: relative;
   img {
@@ -33,7 +32,6 @@
   flex-direction: column;
   height: 7em;
   justify-content: center;
-  background: $base;
   h1 {
     font-weight: $font-weight-regular;
     font-size: 1.3em;
