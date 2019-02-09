@@ -31,13 +31,7 @@ export class VideoService {
 
   getRelatedVideos(query) {
     this.dataService.fetchVideos(query).subscribe((response: any) => {
-      this.resultsService.resultsChanged.next(response.items);
-    });
-  }
-
-  getRelatedPlaylists(id) {
-    this.dataService.fetchPlaylists(id).subscribe((response: any) => {
-      this.resultsService.playlistResultsChanged.next(response.items);
+      this.resultsService.resultsChanged.next(response);
     });
   }
 }

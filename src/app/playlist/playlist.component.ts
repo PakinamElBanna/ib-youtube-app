@@ -19,10 +19,9 @@ export class PlaylistComponent implements OnInit {
 
   constructor(
     private playlistService: PlaylistService,
-    private route: ActivatedRoute,
-    private resultsService: ResultsService
-  ) { this.route.queryParams.subscribe(
-    (params: Params) => {
+    private route: ActivatedRoute ) {
+      this.route.queryParams.subscribe(
+      (params: Params) => {
       this.query = params;
       this.playlistService.getPlaylist(this.query);
     }

@@ -25,7 +25,7 @@ export class Item {
   snippet: any;
   itemCardType: '';
   constructor(values?: any) {
-    console.log(values)
+    console.log(values);
     Object.assign(this, values);
     if (values.id) {
       this.itemCardType = (values.kind && values.kind === 'youtube#playlistItem') ? 'youtube#playlistItem' : values.id.kind;

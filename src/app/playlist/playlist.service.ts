@@ -13,9 +13,10 @@ export class PlaylistService {
 
   constructor(private dataService: DataService) {}
 
-  getPlaylist(query) {
-    this.dataService.fetchPlaylists(query).subscribe((response: any) => {
-      this.setPlaylist(response);
+  getPlaylist(params) {
+    this.dataService.fetchPlaylists(params)
+                    .subscribe((response: any) => {
+                    this.setPlaylist(response);
     });
   }
 

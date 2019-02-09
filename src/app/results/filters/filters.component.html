@@ -24,3 +24,92 @@
       </div>
    </form>
 </div>
+
+
+<!-- <ng-template #desktop>
+  <div class="filters__summary">
+    <span class="summary__count">About {{resultsCount | number }} results</span>
+    <button type="button" (click)="onFiltersClick($event)"><i class="material-icons">filter_list</i>filter</button>
+  </div>
+  <div [class.hide]="!showFilters" class="filter row">
+    <div  class="filter__body radio col-4">
+      <h2 class="filter__title">upload date</h2>
+      <form  *ngFor="let option of desktopFilters.publishedAfter">
+        <label for={{option}} class="radio-label col-6">
+          <button class="radio-button" name="order" type="radio" id={{option}}></button> {{option}}
+        </label>
+      </form>
+    </div>
+
+    <div  class="filter__body radio col-4">
+      <h2 class="filter__title">type</h2>
+      <form *ngFor="let option of desktopFilters.type">
+        <label for={{option}} class="radio-label col-6">
+          <input class="radio-button" id={{option}} name="sort" type="radio" checked> {{option}}
+        </label>
+      </form>
+    </div>
+
+    <div>
+      <h2 class="filter__title">sort by</h2>
+      <form class="filter__body radio col-4">
+        <div *ngFor="let option of desktopFilters.sort" class="radio">
+          <label for={{option}} class="radio-label">{{option}}
+            <input id={{option}} name="sort" type="radio" checked>
+          </label>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template> -->
+
+
+<!-- <form class="filter__body radio col-4">
+  <div *ngFor="let option of desktopFilters.sort" class="radio">
+    <input id={{option}} name="sort" type="radio" checked>
+    <label for={{option}} class="radio-label">Checked</label>
+  </div>
+
+  <div class="radio">
+    <input id="radio-2" name="radio" type="radio">
+    <label for="radio-2" class="radio-label">Unchecked</label>
+  </div>
+
+  <div class="radio">
+    <input id="radio-3" name="radio" type="radio" disabled>
+    <label for="radio-3" class="radio-label">Disabled</label>
+  </div>
+</form> -->
+
+<ng-template class="row" #desktop>
+  <div class="filter col-4">
+    <h3 class="filter__title">upload date</h3>
+    <form *ngFor="let option of desktopFilters.publishedAfter" class="filter__body radio row">
+      <input type="radio" name="sort" id={{option}} />
+      <label for={{option}} class="radio-label">
+        {{option}}
+        <button type="button" class="radio-button">
+          <i class="material-icons">close</i>
+        </button>
+      </label>
+    </form>
+  </div>
+  <div class="filter col-4">
+    <h3 class="filter__title">Sort by</h3>
+    <form *ngFor="let option of desktopFilters.sort" class="filter__body radio row">
+      <input type="checkbox" name="sort" id={{option}} />
+      <label for={{option}} class="radio-label">
+        {{option}}
+        <!-- <input type="checkbox" name="sort" id={{option}} value={{option}}/> -->
+      </label>
+    </form>
+  </div>
+  <div class="filter col-4">
+    <h3 class="filter__title">type</h3>
+    <form *ngFor="let option of desktopFilters.type" class="filter__body radio row">
+      <label for={{option}} class="radio-label">
+        <input class="radio-button" type="radio" name="sort" id={{option}} value={{option}} /> {{option}}
+      </label>
+    </form>
+  </div>
+</ng-template>

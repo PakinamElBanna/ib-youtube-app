@@ -34,7 +34,7 @@ export class HeaderComponent {
   performSearch(searchTerm: string) {
     this.dynamicTitle = searchTerm;
     this.router.navigate(['search'], { queryParams: { query: searchTerm }});
-    if (this.deviceService.device === 'mobile') {
+    if (this.deviceService.getScreenSize() === 'mobile') {
       this.searching = false;
     }
   }

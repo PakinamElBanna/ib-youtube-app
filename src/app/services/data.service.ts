@@ -103,42 +103,70 @@ export class DataService {
       );
   }
 
+  fetchRelatedPlaylists(query) {
+    this.generateParams('playlists', query);
+    return this.http.get(`${apiBaseUrl}playlistItems`, {
+      params: this.params
+    }).pipe(
+      retry(3),
+      map(response => {
+        debugger;
+        const data = response;
+        return data;
+      }),
+      catchError((error: Response) => {
+        return throwError(this.error);
+      })
+    );
+  }
+
   generateParams(type: string, query) {
     let params;
     switch (type) {
-      case 'video': {
+      case "video": {
         params = {
           key: APIKEY,
-          fields: 'items(snippet,statistics)',
-          part: 'snippet,statistics',
-          type: 'video',
+          fields: "items",
+          part: "snippet,statistics",
+          type: "video",
           id: query.videoId
         };
         break;
       }
-      case 'videos': {
+      case "videos": {
         params = {
           key: APIKEY,
-          fields: 'nextPageToken,pageInfo,items',
-          part: 'snippet',
-          type: 'video',
+          fields: "nextPageToken,pageInfo,items",
+          part: "snippet",
+          type: "video",
           id: query.videoId
         };
         break;
       }
-      case 'playlist': {
+      case "playlist": {
         params = {
           key: APIKEY,
-          part: 'snippet',
+          part: "snippet,contentDetails",
           type: 'playlist',
-          maxResults: 10
+          maxResults: 10,
+          query
+        };
+        break;
+      }
+      case 'playlists': {
+        params = {
+          key: APIKEY,
+          part: 'snippet,contentDetails',
+          maxResults: 10,
+          query
         };
         break;
       }
       case 'channel': {
         params = {
           key: APIKEY,
-          fields: 'items(statistics,snippet(publishedAt,thumbnails(default,medium)),statistics(viewCount,subscriberCount, videoCount),brandingSettings(channel(title,description),image(bannerMobileImageUrl,bannerImageUrl)))',
+          fields:
+            'items(statistics,snippet(publishedAt,thumbnails(default,medium)),statistics(viewCount,subscriberCount, videoCount),brandingSettings(channel(title,description),image(bannerMobileImageUrl,bannerImageUrl)))',
           part: 'snippet,statistics,contentDetails,brandingSettings',
           type: 'channel',
           id: query.id
