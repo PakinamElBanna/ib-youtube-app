@@ -31,7 +31,7 @@ export class PlaylistComponent implements OnInit {
 ngOnInit() {
 this.playlistService.playlistChanged.subscribe((playlist: Result) => {
 this.results = new Result(playlist);
-this.videoUrl = this.results.items[0].snippet.resourceId.videoId;
+this.videoUrl = `https://www.youtube.com/embed/${this.results.items[0].snippet.resourceId.videoId}`;
   });
 }
 

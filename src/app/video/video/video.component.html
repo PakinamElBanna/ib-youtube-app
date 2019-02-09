@@ -1,6 +1,6 @@
 <div class="video">
-  <iframe id="ytplayer" type="text/html" width="100%" height="53%" [src]="this.videoUrl | safeUrl"
-    frameborder="0"></iframe>
+  <iframe [class.thumbnail]="thumbnail" [src]="videoUrl | safeUrl" width="100%" height="40%" frameborder="0" webkitallowfullscreen mozallowfullscreen
+      allowfullscreen></iframe>
   <app-video-metadata *ngIf="video" [video]="video"></app-video-metadata>
-  <app-list [type] = 'videos' [items]="results?.items"></app-list>
+  <app-list [items]="results?.items"></app-list>
 </div>

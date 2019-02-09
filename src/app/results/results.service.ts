@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Result, PageInfo } from './results/result.model';
+import { Result } from './results/result.model';
 import { DataService } from '../services/data.service';
 
 @Injectable({
@@ -15,8 +15,6 @@ export class ResultsService {
 
   query;
   searchTermChanged = new Subject<string>();
-
-  private pageInfo: PageInfo;
 
   constructor(private dataService: DataService) {}
 

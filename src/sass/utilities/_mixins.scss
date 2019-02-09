@@ -160,6 +160,11 @@
    max-height: 1.2em;
    font-size: 0.9em;
    color: $subtitle;
+       &--playlist {
+    color : $dark_grey;
+    margin-top: 0.5em;
+    font-size: 0.8em;
+  }
   }
 }
 

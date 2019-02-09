@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from "@angular/router";
 import { DataService } from "../services/data.service";
 import { Subject } from 'rxjs';
+import { Result } from '../../results/results/result.model';
 import { Video } from './video/video.model';
 import { ResultsService } from '../results/results.service';
 
@@ -11,6 +12,7 @@ import { ResultsService } from '../results/results.service';
 export class VideoService {
   video: Video;
   videoChanged = new Subject<Video>();
+  videoListChanged = new Subject<Result>();
 
   constructor(
     private route: ActivatedRoute,
@@ -31,7 +33,7 @@ export class VideoService {
 
   getRelatedVideos(query) {
     this.dataService.fetchVideos(query).subscribe((response: any) => {
-      this.resultsService.resultsChanged.next(response);
+      this.videoListChanged.next(response);
     });
   }
 }

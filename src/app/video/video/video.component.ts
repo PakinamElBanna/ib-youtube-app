@@ -13,7 +13,7 @@ import { ResultsService } from '../../results/results.service';
 })
 export class VideoComponent implements OnInit {
   video: Video;
-  results: Result;
+  public results: Result;
   videoUrl: string;
 
   constructor(
@@ -31,14 +31,15 @@ export class VideoComponent implements OnInit {
       this.video = video;
     });
 
-    this.resultsService.resultsChanged.subscribe((results: Result) => {
-      this.results = results;
+    this.videoService.videoListChanged.subscribe((results: Result) => {
+      this.results = new Result(results);
     });
   }
 
   getVideo(params) {
-    this.videoUrl = params.id;
+    this.videoUrl = `https://www.youtube.com/embed/${params.id}`;
     this.videoService.getVideo(params);
-    this.videoService.getRelatedVideos(params);
+    const relatedToVideoQuery = {relatedToVideoId: params.id};
+    this.videoService.getRelatedVideos(relatedToVideoQuery);
   }
 }
