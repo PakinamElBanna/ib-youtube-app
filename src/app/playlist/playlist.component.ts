@@ -4,6 +4,7 @@ import { Result } from '../results/results/result.model';
 import { Video } from '../video/video/video.model';
 import { ActivatedRoute, Params } from '@angular/router';
 import { PlaylistService } from './playlist.service';
+import { DeviceService } from '../device.service';
 
 @Component({
   selector: 'app-playlist',
@@ -19,7 +20,8 @@ export class PlaylistComponent implements OnInit {
 
   constructor(
     private playlistService: PlaylistService,
-    private route: ActivatedRoute ) {
+    private route: ActivatedRoute,
+    public deviceService: DeviceService ) {
       this.route.queryParams.subscribe(
       (params: Params) => {
       this.query = params;

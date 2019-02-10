@@ -1,6 +1,8 @@
-<div class="playlist">
+<div [class.video]= "deviceService.getScreenSize() === 'desktop'">
   <iframe [class.thumbnail]="thumbnail" [src]="videoUrl | safeUrl" width="100%" height="40%" frameborder="0" webkitallowfullscreen mozallowfullscreen
-      allowfullscreen></iframe></div>
+      allowfullscreen>
+    </iframe>
+  </div>
   <div class="playlist">
     <app-list [items]="results"></app-list>
   </div>

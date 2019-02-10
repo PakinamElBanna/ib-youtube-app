@@ -14,7 +14,7 @@
         <app-item-card [item]="item"></app-item-card>
       </li>
     </ul>
-    <app-load-more *ngIf="type == 'videos'" (loadMoreResults)="onLoadMore()">
+    <app-load-more *ngIf="type == 'search'" (loadMoreResults)="onLoadMore()">
     </app-load-more>
   </ng-template>
 </div>

@@ -5,6 +5,7 @@ import { VideoService } from '../video.service';
 import { Video } from './video.model';
 import { Result } from '../../results/results/result.model';
 import { ResultsService } from '../../results/results.service';
+import { DeviceService } from '../../device.service';
 
 @Component({
   selector: 'app-video',
@@ -19,7 +20,8 @@ export class VideoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private videoService: VideoService,
-    private resultsService: ResultsService ) {
+    private resultsService: ResultsService,
+    public deviceService: DeviceService ) {
 
     this.route.queryParams.subscribe((params: Params) => {
       this.getVideo(params);

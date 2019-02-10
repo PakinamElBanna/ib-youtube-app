@@ -1,6 +1,8 @@
-<div class="video">
-  <iframe [class.thumbnail]="thumbnail" [src]="videoUrl | safeUrl" width="100%" height="40%" frameborder="0" webkitallowfullscreen mozallowfullscreen
+<div [class.video]= "deviceService.getScreenSize() === 'desktop'">
+  <iframe [class.thumbnail]="thumbnail" [src]="videoUrl | safeUrl" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen
       allowfullscreen></iframe>
-  <app-video-metadata *ngIf="video" [video]="video"></app-video-metadata>
-  <app-list [items]="results"></app-list>
 </div>
+  <app-video-metadata *ngIf="video" [video]="video"></app-video-metadata>
+
+  <app-list [items]="results"></app-list>
+
