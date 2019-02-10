@@ -1,16 +1,16 @@
 <div>
-  <app-filters *ngIf="type =='search'" [resetFilters]="reset" [resultsCount] = "items?.pageInfo.totalResults" >
+  <app-filters *ngIf="type =='search'" [resetFilters]="reset">
   </app-filters>
   <ul *ngIf="deviceService.getScreenSize() === 'desktop' ; else mobile" class="col-12" infiniteScroll [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="2000" (scrolled)="onLoadMore()">
-    <li *ngFor="let item of items?.items">
+    <li *ngFor="let item of items">
       <app-item-card [item]="item"></app-item-card>
     </li>
   </ul>
 
   <ng-template #mobile>
     <ul class="col-12">
-      <li *ngFor="let item of items?.items">
+      <li *ngFor="let item of items">
         <app-item-card [item]="item"></app-item-card>
       </li>
     </ul>
