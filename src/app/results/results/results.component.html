@@ -1,5 +1,4 @@
 <div class="results">
-  <!-- <h1 *ngIf="deviceService.getScreenSize() === 'desktop'" class="results__count">About {{results?.pageInfo.totalResults}} results</h1> -->
     <app-list (loadMoreResults) = "this.onLoadMore(token)"
               [type] = "'search'"
               [items]="results">

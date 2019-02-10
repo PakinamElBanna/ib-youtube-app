@@ -1,5 +1,5 @@
 <div>
-  <app-filters *ngIf="type =='search'" [resetFilters]="reset" [resultsCount] = "items?.pageInfo.totalResults" >
+  <app-filters *ngIf="type =='search'" [resultsCount] = "items?.pageInfo.totalResults" >
   </app-filters>
   <ul *ngIf="deviceService.getScreenSize() === 'desktop' ; else mobile" class="col-12" infiniteScroll [infiniteScrollDistance]="2"
     [infiniteScrollThrottle]="2000" (scrolled)="onLoadMore()">

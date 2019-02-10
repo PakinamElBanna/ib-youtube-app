@@ -7,7 +7,7 @@ export class NumbersSuffixPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
 
-    const suffixes = ['k', 'M', 'G', 'T', 'P', 'E'];
+    const suffixes = ['K', 'M', 'G', 'T', 'P', 'E'];
 
     if (Number.isNaN(value)) {
           return null;

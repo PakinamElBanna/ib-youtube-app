@@ -19,7 +19,6 @@ export class Statistics {
   public likeCount: number;
   public dislikeCount: number;
   public subscriberCount: number;
-  public videoCount: number;
   constructor(values?: any) {
     Object.assign(this, values);
   }

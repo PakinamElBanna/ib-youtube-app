@@ -4,6 +4,10 @@ import { ResultsComponent } from './results.component';
 import { LoadingComponent } from '../../shared/loading/loading.component';
 import { ItemCardComponent } from '../../shared/item-card/item-card.component';
 import { FiltersComponent } from '../filters/filters.component';
+import { ListComponent } from '../../shared/list/list.component';
+import { SharedModule } from '../../shared/shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 
 describe('ResultsComponent', () => {
@@ -12,12 +16,9 @@ describe('ResultsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultsComponent,
-                      LoadingComponent,
-                      ItemCardComponent,
-                      FiltersComponent ]
-    })
-    .compileComponents();
+      imports: [SharedModule, RouterTestingModule, HttpClientModule],
+      declarations: [ResultsComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

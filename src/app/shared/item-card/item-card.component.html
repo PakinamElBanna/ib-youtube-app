@@ -9,7 +9,6 @@
     <div class="video__info col-6">
       <a (click) = "navigateToView('video','videoId','relatedToVideoId', item.id.videoId)"><h1>{{item.snippet.title}}</h1></a>
       <a (click) = "navigateToView('channel','channelId','relatedToChannelId',item.snippet.channelId)"><h2>{{item.snippet.channelTitle}}</h2></a>
-      <!-- <h3>{{item.statistics.viewCount | number}} views</h3> -->
   </div>
   </div>
 
@@ -27,7 +26,6 @@
       <a (click)="navigateToView('channel','channelId','relatedToChannelId',item.snippet.channelId)">
         <h2>{{item.snippet.channelTitle}}</h2>
       </a>
-      <!-- <h3>{{item.statistics.viewCount | number}} views</h3> -->
     </div>
   </div>
 
@@ -40,8 +38,6 @@
     </div>
     <div class="channel__info col-7">
       <a><h1>{{item.snippet.title}}</h1></a>
-      <!-- <a><h2>{{item.snippet?.statistics?.viewCount | number}} videos</h2></a> -->
-      <!-- <h3>{{item.snippet?.statistics?.subscriberCount | number}} subscribers</h3> -->
     </div>
   </div>
 

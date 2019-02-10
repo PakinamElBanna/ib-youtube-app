@@ -16,7 +16,7 @@ export class ListComponent {
               public deviceService: DeviceService) {}
 
   onLoadMore() {
-       this.resultsService.loadMore();
+    this.resultsService.loadMore();
   }
 
   OnChanges(change) {

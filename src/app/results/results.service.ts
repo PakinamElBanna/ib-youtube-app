@@ -11,7 +11,6 @@ export class ResultsService {
   playlistresults: Result;
   resultsChanged = new Subject<Result>();
   playlistResultsChanged = new Subject<Result>();
-  resetFilters = new Subject<boolean>();
 
   query;
   searchTermChanged = new Subject<string>();
@@ -61,7 +60,6 @@ export class ResultsService {
       filter.hasOwnProperty("type") || filter.hasOwnProperty("publishedAfter")
         ? true
         : this.query.hasOwnProperty("order");
-    this.resetFilters.next(reset);
     this.results = new Result(results);
     this.resultsChanged.next(this.results);
   }

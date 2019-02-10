@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FiltersComponent } from './filters.component';
-import { FilterComponent } from '../../shared/filter/filter.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('FiltersComponent', () => {
   let component: FiltersComponent;
@@ -9,9 +10,9 @@ describe('FiltersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FiltersComponent, FilterComponent ]
-    })
-    .compileComponents();
+      declarations: [FiltersComponent],
+      imports: [FormsModule, ReactiveFormsModule, HttpClientModule]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,6 +22,8 @@ describe('FiltersComponent', () => {
   });
 
   it('should create', () => {
+    component.resultsCount = 7659;
+    fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });
