@@ -1,26 +1,63 @@
-<div class="filters row row--between">
+<div *ngIf = "deviceService.getScreenSize() == 'mobile'; else desktop" class="filters row row--between">
   <form class="row--start row">
-    <div class="filters__item col-6">
+    <div class="filters__item">
       <select name="upload date"
-              class="filter__picker"
-              (change)="onChange($event)">
-        <option *ngFor="let option of mobileFilters.publishedAfter"
-                [ngValue]="option"
-                >
-                {{option}}
-      </option>
-      </select>
-    </div>
-    <div class="filters__item col-6">
-      <select name="type"
-              class="filter__picker"
-              (change)="onChange($event)">
-        <option *ngFor="let option of mobileFilters.type"
-        [ngValue]="option"
-        >
-        {{option}}
-        </option>
-      </select>
-      </div>
-   </form>
+      class="filter__picker"
+      (change)="onMobileChange($event)">
+      <option *ngFor="let option of mobileFilters.publishedAfter"
+      [ngValue]="option"
+      ih="option"
+      >
+      {{option}}
+    </option>
+  </select>
 </div>
+<div class="filters__item">
+  <select name="type"
+  class="filter__picker"
+  (change)="onMobileChange($event)">
+  <option *ngFor="let option of mobileFilters.type"
+  [ngValue]="option"
+  >
+  {{option}}
+</option>
+</select>
+</div>
+</form>
+</div>
+
+<ng-template #desktop>
+  <div class="filters__summary">
+    <span class="summary__count">About {{resultsCount | number }} results</span>
+    <button type="button" (click)="onFiltersClick($event)"><i class="material-icons">filter_list</i>filter</button>
+  </div>
+  <div class="row" *ngIf="showFilters">
+    <div class="filter col-4">
+      <h3 class="filter__title">upload date</h3>
+      <form *ngFor="let option of desktopFilters.publishedAfter" class="filter__body radio row">
+        <input type="checkbox" name="publishedAfter" [id]="option" [value]="option" (change)="onDesktopChange($event)" [checked] = "this.dateFilters === option"/>
+        <label for={{option}} class="radio-label--checkbox">
+          {{option}}
+        </label>
+      </form>
+    </div>
+    <div class="filter col-4">
+      <h3 class="filter__title">Type</h3>
+      <form *ngFor="let option of desktopFilters.type" class="filter__body radio row">
+        <input type="checkbox" name="type" [id]="option" [value]="option"  (change)="onDesktopChange($event)" [checked] = "this.filters['type'] === option"  />
+        <label for={{option}} class="radio-label--checkbox">
+          {{option}}
+        </label>
+      </form>
+    </div>
+    <div class="filter col-4">
+      <h3 class="filter__title">Sort by</h3>
+      <form *ngFor="let option of desktopFilters.order" class="filter__body radio row">
+        <input type="radio" name="order" [checked] = "option == 'relevance'" value={{option}} [id]="option" [(ngModel)] ="this.filters.order" (change)="onRadioChange($event)" />
+        <label for={{option}} class="radio-label">
+          {{option}}
+        </label>
+      </form>
+    </div>
+  </div>
+</ng-template>

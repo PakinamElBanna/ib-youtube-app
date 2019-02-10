@@ -49,7 +49,6 @@ export class DataService {
   }
 
   fetchVideos(id) {
-    console.log(id);
     this.generateParams('videos', id);
     return this.http
       .get(`${apiBaseUrl}search`, {

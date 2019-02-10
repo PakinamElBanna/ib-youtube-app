@@ -10,20 +10,25 @@ import { DeviceService } from '../../device.service';
 })
 export class FiltersComponent {
 
+  @Input() resultsCount: number;
   @Input() resetFilters: boolean;
 
   showFilters = false;
-  filters: any = { sort: 'relevance' };
+  selected: '';
+  filters: any = { order: 'relevance'};
+  dateFilters;
+
+  selectedFilters = ['sort'];
 
   mobileFilters = {
-    type: ['all', 'channel', 'playlist'],
+    type: ['video', 'channel', 'playlist'],
     publishedAfter: ['today', 'this week', 'this month']
   };
 
   desktopFilters = {
-    type: ['all', 'channel', 'playlist'],
+    type: ['video', 'channel', 'playlist'],
     publishedAfter: ['today', 'this week', 'this month'],
-    sort: ['relevance', 'date', 'view count']
+    order: ['relevance', 'date', 'view count']
   };
 
   constructor(
@@ -31,49 +36,86 @@ export class FiltersComponent {
     public deviceService: DeviceService
   ) {}
 
-  onChange(event) {
+
+  onMobileChange(event) {
+    let value = event.target.value;
+    let name = event.target.name;
     if (event.target.name === 'upload date') {
-      const date = new Date();
-      switch (event.target.value) {
-        case 'today': {
-          this.filters.publishedAfter = new Date().toISOString();
-          break;
-        }
-        case 'this week': {
-          // Just before the previous week begins.
-          this.filters.publishedAfter = new Date(
-            date.setDate(date.getDate() - 6)
-          ).toISOString();
-          break;
-        }
-        case 'this month': {
-          // just before the previous month begins. I assumed 28 days
-          this.filters.publishedAfter = new Date(
-            date.setDate(date.getDate() - 28)
-          ).toISOString();
-          break;
-        }
-      }
-    } else {
-      this.filters[event.target.name] = event.target.value;
+      value = this.parseDate(event.target.value);
+      name = 'publishedAfter';
     }
+    this.filters[name] = value;
     return this.resultsService.filterResults(this.filters);
+  }
+
+
+  onDesktopChange(event) {
+    let name = event.target.name;
+    let value = event.target.id;
+
+    if (event.target.name === 'upload date' || event.target.name === 'publishedAfter' ) {
+      name = 'publishedAfter';
+      this.dateFilters = value;
+      value = this.parseDate(value);
+    }
+    if (event.target.checked === false) {
+      delete this.filters[name];
+      return this.resultsService.filterResults(this.filters);
+    } else {
+      if (event.target.name === 'publishedAfter' && this.filters['type']) {
+        delete this.filters['type'];
+        this.showFilters = false;
+        this.filters[name] = value;
+        const filters = this.filters;
+        return this.resultsService.filterResults(this.filters);
+      }
+      if (event.target.name === 'type' && this.filters['publishedAfter']) {
+        delete this.filters['publishedAfter'];
+        this.showFilters = false;
+        this.filters[name] = value;
+        const filters = this.filters;
+        return this.resultsService.filterResults(this.filters);
+      }
+      this.filters[name] = value;
+      return this.resultsService.filterResults(this.filters);
+    }
+  }
+
+  onRadioChange(event) {
+    const name = event.target.name;
+    const value = event.target.id === 'view count' ? 'viewCount' : event.target.id;
+    this.filters[name] = value;
+    const filters = this.filters;
+    return this.resultsService.filterResults(filters);
+  }
+
+  parseDate(value) {
+    const date = new Date();
+    let parsedDate;
+    switch (value) {
+      case 'today': {
+        parsedDate = new Date().toISOString();
+        break;
+      }
+      case 'this week': {
+        // Just before the previous week begins.
+        parsedDate = new Date(
+          date.setDate(date.getDate() - 6)
+        ).toISOString();
+        break;
+      }
+      case 'this month': {
+        // just before the previous month begins. I assumed 28 days
+        parsedDate = new Date(
+          date.setDate(date.getDate() - 28)
+        ).toISOString();
+        break;
+      }
+    }
+    return parsedDate;
   }
 
   onFiltersClick(event) {
     this.showFilters = !this.showFilters;
-  }
-
-  removeFilter(name) {
-    const filters = Object.keys(this.filters).reduce((object, key) => {
-      if (key !== name) {
-        object[key] = this.filters[key];
-      }
-      return object;
-    }, {});
-    this.filters = filters;
-    this.showFilters = false;
-    return this.resultsService.filterResults(this.filters);
-
   }
 }
