@@ -3,9 +3,10 @@
     <div class="filters__item">
       <select name="upload date"
       class="filter__picker"
-      (change)="onChange($event)">
+      (change)="onMobileChange($event)">
       <option *ngFor="let option of mobileFilters.publishedAfter"
       [ngValue]="option"
+      ih="option"
       >
       {{option}}
     </option>
@@ -14,7 +15,7 @@
 <div class="filters__item">
   <select name="type"
   class="filter__picker"
-  (change)="onChange($event)">
+  (change)="onMobileChange($event)">
   <option *ngFor="let option of mobileFilters.type"
   [ngValue]="option"
   >
@@ -34,7 +35,7 @@
     <div class="filter col-4">
       <h3 class="filter__title">upload date</h3>
       <form *ngFor="let option of desktopFilters.publishedAfter" class="filter__body radio row">
-        <input type="checkbox" name="publishedAfter" [id]="option" [value]="option" (change)="onChange($event)" [checked] = "this.dateFilters === option"/>
+        <input type="checkbox" name="publishedAfter" [id]="option" [value]="option" (change)="onDesktopChange($event)" [checked] = "this.dateFilters === option"/>
         <label for={{option}} class="radio-label--checkbox">
           {{option}}
         </label>
@@ -43,7 +44,7 @@
     <div class="filter col-4">
       <h3 class="filter__title">Type</h3>
       <form *ngFor="let option of desktopFilters.type" class="filter__body radio row">
-        <input type="checkbox" name="type" [id]="option" [value]="option"  (change)="onChange($event)" [checked] = "this.filters['type'] === option"  />
+        <input type="checkbox" name="type" [id]="option" [value]="option"  (change)="onDesktopChange($event)" [checked] = "this.filters['type'] === option"  />
         <label for={{option}} class="radio-label--checkbox">
           {{option}}
         </label>

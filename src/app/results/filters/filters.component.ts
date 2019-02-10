@@ -36,7 +36,20 @@ export class FiltersComponent {
     public deviceService: DeviceService
   ) {}
 
-  onChange(event) {
+
+  onMobileChange(event) {
+    let value = event.target.value;
+    let name = event.target.name;
+    if (event.target.name === 'upload date') {
+      value = this.parseDate(event.target.value);
+      name = 'publishedAfter';
+    }
+    this.filters[name] = value;
+    return this.resultsService.filterResults(this.filters);
+  }
+
+
+  onDesktopChange(event) {
     let name = event.target.name;
     let value = event.target.id;
 
@@ -48,8 +61,7 @@ export class FiltersComponent {
     if (event.target.checked === false) {
       delete this.filters[name];
       return this.resultsService.filterResults(this.filters);
-    } else
-    {
+    } else {
       if (event.target.name === 'publishedAfter' && this.filters['type']) {
         delete this.filters['type'];
         this.showFilters = false;
